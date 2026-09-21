@@ -24,15 +24,8 @@ import { TRIP_CONFIG } from "@/data/tripConfig";
 
 interface MasterCinematicHeroProps {
   onBookSeatClick?: () => void;
-  isMuted?: boolean;
-  onToggleMute?: () => void;
 }
 
-export default function MasterCinematicHero({
-  onBookSeatClick,
-  isMuted = false,
-  onToggleMute,
-}: MasterCinematicHeroProps) {
 export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematicHeroProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -44,9 +37,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
   const shastradharaVideoRef = useRef<HTMLVideoElement>(null);
   const mapAnimVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Slow, luxury, cinematic duration: ~58.0 seconds total
-  // Guaranteed: Final CTA screen holds for at least 4 full seconds (exceeding 3s requirement)
-  const TOTAL_DURATION = 58.0;
   // Total calm timeline duration (~62 seconds total)
   // Scene 14/Final CTA holds steadily for at least 4.5 seconds
   const TOTAL_DURATION = 62.0;
@@ -69,7 +59,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  // Video playback management: Play ONLY the active scene's video to conserve memory/GPU
   // Video playback management: Play ONLY active scene video without sound
   useEffect(() => {
     if (!isPlaying) {
@@ -81,8 +70,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       return;
     }
 
-    // Scene 1: 0 - 5.5s (Opening Brand Intro)
-    if (currentTime < 5.5) {
     // 0.0 - 5.0s: Opening brand intro
     if (currentTime < 5.0) {
       mapAnimVideoRef.current?.play().catch(() => {});
@@ -91,8 +78,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       maheshwarVideoRef.current?.pause();
       shastradharaVideoRef.current?.pause();
     }
-    // Scene 2: 7.0 - 11.5s (Madhya Pradesh Drone Video)
-    else if (currentTime >= 7.0 && currentTime < 11.5) {
     // 7.5 - 12.0s: MP Drone Video
     else if (currentTime >= 7.5 && currentTime < 12.0) {
       mapAnimVideoRef.current?.pause();
@@ -101,8 +86,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       maheshwarVideoRef.current?.pause();
       shastradharaVideoRef.current?.pause();
     }
-    // Scene 5: 30.5 - 35.0s (Jam Gate Drone Video)
-    else if (currentTime >= 30.5 && currentTime < 35.0) {
     // 32.0 - 36.5s: Jam Gate Drone Video
     else if (currentTime >= 32.0 && currentTime < 36.5) {
       mpVideoRef.current?.pause();
@@ -110,22 +93,17 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       maheshwarVideoRef.current?.pause();
       shastradharaVideoRef.current?.pause();
     }
-    // Scene 6B: 41.5 - 44.0s (Maheshwar Fort Drone Video)
-    else if (currentTime >= 41.5 && currentTime < 44.0) {
     // 44.0 - 47.0s: Maheshwar Drone Video
     else if (currentTime >= 44.0 && currentTime < 47.0) {
       jamGateVideoRef.current?.pause();
       maheshwarVideoRef.current?.play().catch(() => {});
       shastradharaVideoRef.current?.pause();
     }
-    // Scene 7: 46.5 - 50.5s (Shastradhara Rapids Drone Video)
-    else if (currentTime >= 46.5 && currentTime < 50.5) {
     // 50.5 - 54.5s: Sahastradhara Rapids Drone Video
     else if (currentTime >= 50.5 && currentTime < 54.5) {
       maheshwarVideoRef.current?.pause();
       shastradharaVideoRef.current?.play().catch(() => {});
     }
-    // Map navigation, Rau Breakfast, Maheshwar Thali, Return
     else {
       mpVideoRef.current?.pause();
       jamGateVideoRef.current?.pause();
@@ -140,25 +118,19 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
   };
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // MATHEMATICAL BUS ROUTE & TANGENT HEADING CALCULATION
   // BUS ROAD COORDINATES & TANGENT HEADING CALCULATION
   // Generous spacing between stops with gentle deceleration & pauses
   // Front of bus always faces direction of travel along smooth road curves
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   const getRawBusPos = (t: number) => {
-    // 11.5s – 22.0s: Indore 5 Pickups (Spaced out, slow, calm driving)
     // 12.0s – 24.5s: Indore 5 Pickups (06:45 AM to 07:25 AM)
     // Vijay Nagar (496, 395) -> Bengali Sq (518, 418) -> Teen Imli (500, 442) -> IT Park (478, 456) -> Rajiv Gandhi (462, 474)
-    if (t < 22.0) {
-      const p = Math.max(0, Math.min(1, (t - 11.5) / 10.5));
     if (t < 24.5) {
       const p = Math.max(0, Math.min(1, (t - 12.0) / 12.5));
 
-      // Stop 1 to Stop 2: Vijay Nagar -> Bengali Sq (p: 0 to 0.22, 11.5s to 13.8s)
       // Stop 1 to Stop 2: Vijay Nagar -> Bengali Sq (p: 0 to 0.22, 12.0s to 14.8s)
       if (p < 0.22) {
         const uRaw = p / 0.22;
-        const driveU = Math.min(1, uRaw / 0.75); // Drives for 75% of segment, pauses for 25%
         const driveU = Math.min(1, uRaw / 0.72);
         const smoothU = driveU < 0.5 ? 2 * driveU * driveU : -1 + (4 - 2 * driveU) * driveU;
         return {
@@ -166,11 +138,9 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           y: 395 + (418 - 395) * smoothU,
         };
       }
-      // Stop 2 to Stop 3: Bengali Sq -> Teen Imli (p: 0.22 to 0.44, 13.8s to 16.1s)
       // Stop 2 to Stop 3: Bengali Sq -> Teen Imli (p: 0.22 to 0.44, 14.8s to 17.5s)
       else if (p < 0.44) {
         const uRaw = (p - 0.22) / 0.22;
-        const driveU = Math.min(1, uRaw / 0.75);
         const driveU = Math.min(1, uRaw / 0.72);
         const smoothU = driveU < 0.5 ? 2 * driveU * driveU : -1 + (4 - 2 * driveU) * driveU;
         return {
@@ -178,11 +148,9 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           y: 418 + (442 - 418) * smoothU,
         };
       }
-      // Stop 3 to Stop 4: Teen Imli -> IT Park (p: 0.44 to 0.66, 16.1s to 18.4s)
       // Stop 3 to Stop 4: Teen Imli -> IT Park (p: 0.44 to 0.66, 17.5s to 20.2s)
       else if (p < 0.66) {
         const uRaw = (p - 0.44) / 0.22;
-        const driveU = Math.min(1, uRaw / 0.75);
         const driveU = Math.min(1, uRaw / 0.72);
         const smoothU = driveU < 0.5 ? 2 * driveU * driveU : -1 + (4 - 2 * driveU) * driveU;
         return {
@@ -190,11 +158,9 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           y: 442 + (456 - 442) * smoothU,
         };
       }
-      // Stop 4 to Stop 5: IT Park -> Rajiv Gandhi (p: 0.66 to 0.88, 18.4s to 20.7s)
       // Stop 4 to Stop 5: IT Park -> Rajiv Gandhi (p: 0.66 to 0.88, 20.2s to 23.0s)
       else if (p < 0.88) {
         const uRaw = (p - 0.66) / 0.22;
-        const driveU = Math.min(1, uRaw / 0.75);
         const driveU = Math.min(1, uRaw / 0.72);
         const smoothU = driveU < 0.5 ? 2 * driveU * driveU : -1 + (4 - 2 * driveU) * driveU;
         return {
@@ -202,7 +168,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           y: 456 + (474 - 456) * smoothU,
         };
       }
-      // Stop 5 to Highway: Rajiv Gandhi -> heading toward Rau Circle (p: 0.88 to 1.0, 20.7s to 22.0s)
       // Stop 5 to Highway: Rajiv Gandhi -> heading toward Rau Circle (p: 0.88 to 1.0, 23.0s to 24.5s)
       else {
         const uRaw = (p - 0.88) / 0.12;
@@ -214,17 +179,11 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       }
     }
 
-    // 22.0s – 28.5s: Rau Circle Breakfast Stop (Bus gently paused at Rau Circle)
-    if (t < 28.5) {
     // 24.5s – 30.0s: Rau Circle Breakfast Stop (07:30 AM Nashta)
     if (t < 30.0) {
       return { x: 450, y: 496 };
     }
 
-    // 28.5s – 35.0s: Rau Circle (450, 496) to Jam Gate (468, 545)
-    if (t < 35.0) {
-      // 28.5s – 30.5s: Bus visibly departs Rau Circle along the winding mountain ascent
-      const u = Math.max(0, Math.min(1, (t - 28.5) / 4.5));
     // 30.0s – 36.5s: Rau Circle (450, 496) to Jam Gate (468, 545) (09:00 AM)
     if (t < 36.5) {
       const u = Math.max(0, Math.min(1, (t - 30.0) / 4.5));
@@ -234,10 +193,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       return { x: curvedX, y: curvedY };
     }
 
-    // 35.0s – 44.0s: Jam Gate (468, 545) to Maheshwar (440, 605)
-    if (t < 44.0) {
-      // 35.0s – 37.0s: Bus visibly leaves Jam Gate, descending south toward Narmada
-      const u = Math.max(0, Math.min(1, (t - 35.0) / 4.5));
     // 36.5s – 47.0s: Jam Gate (468, 545) to Maheshwar (440, 605) (11:00 AM - 02:30 PM)
     if (t < 47.0) {
       const u = Math.max(0, Math.min(1, (t - 36.5) / 4.5));
@@ -247,10 +202,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       return { x: curvedX, y: curvedY };
     }
 
-    // 44.0s – 50.5s: Maheshwar (440, 605) to Shastradhara (412, 630)
-    // CRITICAL: Bus VISIBLY LEAVES MAHESHWAR along river road (44.0s – 46.5s)
-    if (t < 50.5) {
-      const u = Math.max(0, Math.min(1, (t - 44.0) / 4.0));
     // 47.0s – 54.5s: Maheshwar (440, 605) to Sahastradhara (412, 630) (04:00 PM)
     // Bus VISIBLY travels along river road from Maheshwar to Sahastradhara
     if (t < 54.5) {
@@ -261,8 +212,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       return { x: curvedX, y: curvedY };
     }
 
-    // 50.5s – 58.0s+: Return Highway Circuit (Shastradhara -> Indore)
-    const u = Math.max(0, Math.min(1, (t - 50.5) / 5.0));
     // 54.5s – 62.0s: Return Highway Circuit (Sahastradhara -> Indore) (07:00 PM Return)
     const u = Math.max(0, Math.min(1, (t - 54.5) / 4.5));
     const smoothU = u < 0.5 ? 2 * u * u : -1 + (4 - 2 * u) * u;
@@ -272,8 +221,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
   };
 
   const getBusMotion = () => {
-    // Before 11.5s: Not yet on the road
-    if (currentTime < 11.5) {
     // Before 12.0s: Not yet on the road
     if (currentTime < 12.0) {
       return { x: 496, y: 395, rotation: 135, visible: false, opacity: 0 };
@@ -289,16 +236,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
     if (Math.hypot(dx, dy) > 0.04) {
       rotation = (Math.atan2(dy, dx) * 180) / Math.PI;
     } else {
-      // Natural heading retention during gentle stop pauses
-      if (currentTime < 13.8) rotation = 45;
-      else if (currentTime < 16.1) rotation = 125;
-      else if (currentTime < 18.4) rotation = 145;
-      else if (currentTime < 20.7) rotation = 135;
-      else if (currentTime < 28.5) rotation = 120;
-      else if (currentTime < 35.0) rotation = 70;
-      else if (currentTime < 44.0) rotation = 125;
-      else if (currentTime < 50.5) rotation = 140;
-      else rotation = -70; // Northbound return toward Indore
       if (currentTime < 14.8) rotation = 45;
       else if (currentTime < 17.5) rotation = 125;
       else if (currentTime < 20.2) rotation = 145;
@@ -321,68 +258,40 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
   const bus = getBusMotion();
 
-  // Slow, Controlled Camera ViewBox for Smooth Cinematic Tracking
   // Dynamic Camera ViewBox for Smooth Cinematic Tracking
   const getViewBox = () => {
-    if (currentTime < 5.5) {
     if (currentTime < 5.0) {
       return "0 0 1000 820"; // Subcontinent overview
     }
-    if (currentTime < 11.5) {
-      return "260 260 480 400"; // Gradual MP Regional zoom
     if (currentTime < 12.0) {
       return "240 240 520 420"; // Madhya Pradesh cartographic zoom
     }
-    // 11.5s – 22.0s: Slow camera smoothly tracking the bus through spacious Indore
-    if (currentTime < 22.0) {
-      return `${bus.x - 80} ${bus.y - 65} 160 130`;
     // 12.0s – 24.5s: Tracking Indore pickups with spacious framing
     if (currentTime < 24.5) {
       return `${bus.x - 85} ${bus.y - 70} 170 140`;
     }
-    // 22.0s – 28.5s: Rau Circle Breakfast Hub
-    if (currentTime < 28.5) {
-      return "360 410 180 145";
     // 24.5s – 30.0s: Rau Circle Breakfast Stop
     if (currentTime < 30.0) {
       return "350 400 190 150";
     }
-    // 28.5s – 35.0s: Jam Gate mountain pass
-    if (currentTime < 35.0) {
-      return `${bus.x - 85} ${bus.y - 70} 170 140`;
     // 30.0s – 36.5s: Jam Gate mountain pass
     if (currentTime < 36.5) {
       return `${bus.x - 90} ${bus.y - 75} 180 145`;
     }
-    // 35.0s – 44.0s: Maheshwar Narmada valley
-    if (currentTime < 44.0) {
-      return `${bus.x - 90} ${bus.y - 75} 180 150`;
     // 36.5s – 47.0s: Maheshwar Narmada valley
     if (currentTime < 47.0) {
       return `${bus.x - 95} ${bus.y - 80} 190 155`;
     }
-    // 44.0s – 50.5s: Shastradhara river trail (visibly travels along riverbank)
-    if (currentTime < 50.5) {
-      return "330 520 200 160";
     // 47.0s – 54.5s: Sahastradhara river trail
     if (currentTime < 54.5) {
       return "320 510 210 170";
     }
-    // 50.5s+: Slow camera pull-back revealing the full round-trip loop
-    return "240 310 520 380";
     // 54.5s+: Slow camera pull-back showing full round trip loop
     return "230 300 540 400";
   };
 
-  // Active pickup stop calculation for pristine, minimal itinerary HUD
   // Active pickup stop index for clean minimalist HUD
   const getActivePickupIndex = () => {
-    if (currentTime < 11.5) return -1;
-    if (currentTime < 13.8) return 0; // Vijay Nagar (8:00 AM)
-    if (currentTime < 16.1) return 1; // Bengali Square (8:15 AM)
-    if (currentTime < 18.4) return 2; // Teen Imli (8:30 AM)
-    if (currentTime < 20.7) return 3; // IT Park (8:45 AM)
-    if (currentTime < 22.0) return 4; // Rajiv Gandhi (9:00 AM)
     if (currentTime < 12.0) return -1;
     if (currentTime < 14.8) return 0; // Vijay Nagar (06:45 AM)
     if (currentTime < 17.5) return 1; // Bengali Square (07:00 AM)
@@ -394,17 +303,8 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
   const activePickupIdx = getActivePickupIndex();
 
-  // Slow Food Cinema: Active step for Maheshwar Dal Bafla Thali (37.0s – 41.5s)
   // Active step for 01:30 PM Malwa Special Lunch Dal Bafla Thali (39.5s – 44.0s)
   const getActiveThaliStep = () => {
-    if (currentTime < 37.0) return 0;
-    if (currentTime < 37.7) return 1; // Kansa Thali
-    if (currentTime < 38.4) return 2; // Dal
-    if (currentTime < 39.1) return 3; // Bafla
-    if (currentTime < 39.8) return 4; // Kadhi
-    if (currentTime < 40.5) return 5; // Rice
-    if (currentTime < 41.0) return 6; // Ladoo
-    return 7; // Full royal feast
     if (currentTime < 39.5) return 0;
     if (currentTime < 40.1) return 1; // Kansa Thali placed
     if (currentTime < 40.7) return 2; // Dal served
@@ -424,13 +324,10 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       className="relative w-screen h-screen min-h-[640px] max-h-[1100px] overflow-hidden bg-[#061727] select-none"
     >
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          LAYER 1: GEOGRAPHIC MAP WORLD (Always active beneath for zero flashes)
           LAYER 1: ACTUAL MADHYA PRADESH MAP WITH DETAILED GEOGRAPHY
           Recognizable state geography, Narmada river valley, Vindhyachals & key hubs
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Environmental Vignette Layers */}
-        <div className="absolute top-0 bottom-0 left-0 w-1/3 max-w-md z-0 pointer-events-none overflow-hidden opacity-30">
         {/* Subtle Environmental Vignette Margins */}
         <div className="absolute top-0 bottom-0 left-0 w-1/3 max-w-md z-0 pointer-events-none overflow-hidden opacity-25">
           <Image
@@ -443,7 +340,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#061727]/80 to-[#061727]" />
         </div>
-        <div className="absolute top-0 bottom-0 right-0 w-1/3 max-w-md z-0 pointer-events-none overflow-hidden opacity-30">
         <div className="absolute top-0 bottom-0 right-0 w-1/3 max-w-md z-0 pointer-events-none overflow-hidden opacity-25">
           <Image
             src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
@@ -456,7 +352,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#061727]/80 to-[#061727]" />
         </div>
 
-        {/* Vector SVG Map Canvas with Slow Camera Motion */}
         {/* Vector SVG Map Canvas with Authentic MP Geography */}
         <motion.svg
           viewBox={getViewBox()}
@@ -464,16 +359,12 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           preserveAspectRatio="xMidYMid slice"
         >
           <defs>
-            <radialGradient id="mpGlowSlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#EA580C" stopOpacity="0.45" />
-              <stop offset="60%" stopColor="#D97706" stopOpacity="0.18" />
             <radialGradient id="mpGlowReal" cx="48%" cy="50%" r="55%">
               <stop offset="0%" stopColor="#EA580C" stopOpacity="0.38" />
               <stop offset="50%" stopColor="#D97706" stopOpacity="0.15" />
               <stop offset="100%" stopColor="#061727" stopOpacity="0" />
             </radialGradient>
 
-            <linearGradient id="routeGradientSlow" x1="0%" y1="0%" x2="0%" y2="100%">
             <linearGradient id="routeGradientReal" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#EA580C" />
               <stop offset="35%" stopColor="#F59E0B" />
@@ -481,23 +372,15 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
               <stop offset="100%" stopColor="#10B981" />
             </linearGradient>
 
-            <filter id="mapGlowSlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="3.5" result="blur" />
             <filter id="mapGlowReal" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="3.2" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
-          {/* Subcontinent Silhouette */}
           {/* Subcontinent Silhouette in Background */}
           <path
             d="M 440,80 Q 480,95 510,140 Q 560,180 580,240 Q 640,260 700,280 Q 770,300 810,340 Q 820,380 770,410 Q 720,400 680,440 Q 640,490 610,540 Q 570,610 540,680 Q 510,750 490,820 Q 460,780 430,710 Q 380,630 350,560 Q 310,520 270,470 Q 230,420 240,360 Q 270,330 300,310 Q 350,290 380,240 Q 400,180 420,130 Z"
-            fill="#0A2E4C"
-            fillOpacity="0.45"
-            stroke="#2563EB"
-            strokeWidth="1.8"
-            strokeOpacity="0.4"
             fill="#082035"
             fillOpacity="0.4"
             stroke="#1D4ED8"
@@ -505,15 +388,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             strokeOpacity="0.35"
           />
 
-          {/* Sacred Narmada River (Flowing through Maheshwar & Shastradhara) */}
-          <path
-            d="M 690,460 Q 590,480 510,495 Q 460,510 400,530 Q 330,550 270,560"
-            fill="none"
-            stroke="#0EA5E9"
-            strokeWidth="3.2"
-            strokeOpacity="0.8"
-            filter="url(#mapGlowSlow)"
-          />
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               ACTUAL MADHYA PRADESH GEOGRAPHY & STATE CONTOUR
               (Recognizable state shape with Chambal, Malwa, Narmada Valley & Baghelkhand)
@@ -522,16 +396,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             {/* Ambient State Glow */}
             <ellipse cx="485" cy="510" rx="175" ry="120" fill="url(#mpGlowReal)" />
 
-          {/* Madhya Pradesh Boundary Glow */}
-          <ellipse cx="500" cy="480" rx="145" ry="95" fill="url(#mpGlowSlow)" />
-          <path
-            d="M 390,400 Q 450,380 540,390 Q 620,410 650,440 Q 640,490 590,530 Q 530,560 450,550 Q 380,520 370,470 Z"
-            fill="#0F3B66"
-            fillOpacity="0.55"
-            stroke="#EA580C"
-            strokeWidth="2.4"
-            filter="url(#mapGlowSlow)"
-          />
             {/* Authentic Detailed State Boundary Path of Madhya Pradesh */}
             <path
               d="M 445,335 C 465,320 490,325 505,340 C 520,325 540,315 560,335 C 585,345 615,360 635,385 C 660,405 680,430 690,465 C 695,495 685,530 660,560 C 640,580 610,600 580,615 C 550,625 520,630 480,635 C 440,640 405,635 375,610 C 350,585 340,550 345,510 C 350,470 370,435 390,405 C 410,380 425,355 445,335 Z"
@@ -580,19 +444,15 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           </g>
 
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-              SPACIOUS EXPEDITION HIGHWAY ROAD LINE
               SOUTHBOUND EXPEDITION ROAD LINE
               Indore -> Rau -> Jam Gate -> Maheshwar -> Sahastradhara
               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          {currentTime >= 11.0 && (
-            <g id="pickup-highway-route">
           {currentTime >= 11.5 && (
             <g id="expedition-road">
               {/* Road bed shadow */}
               <path
                 d="M 496,395 C 508,405 514,410 518,418 C 516,430 508,436 500,442 C 490,448 484,452 478,456 C 472,462 466,468 462,474 C 456,482 452,488 450,496 C 454,515 462,530 468,545 C 462,568 452,588 440,605 C 430,618 420,624 412,630"
                 fill="none"
-                stroke="#030C16"
                 stroke="#020810"
                 strokeWidth="8"
                 strokeLinecap="round"
@@ -602,17 +462,13 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
               <path
                 d="M 496,395 C 508,405 514,410 518,418 C 516,430 508,436 500,442 C 490,448 484,452 478,456 C 472,462 466,468 462,474 C 456,482 452,488 450,496 C 454,515 462,530 468,545 C 462,568 452,588 440,605 C 430,618 420,624 412,630"
                 fill="none"
-                stroke="url(#routeGradientSlow)"
                 stroke="url(#routeGradientReal)"
                 strokeWidth="3.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                filter="url(#mapGlowSlow)"
                 filter="url(#mapGlowReal)"
               />
 
-              {/* Complete Round-Trip Return Path back to Indore (Appears in Scene 8) */}
-              {currentTime >= 50.5 && (
               {/* Complete Round-Trip Return Path back to Indore */}
               {currentTime >= 54.5 && (
                 <path
@@ -622,7 +478,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                   strokeWidth="2.4"
                   strokeDasharray="6,6"
                   opacity="0.9"
-                  filter="url(#mapGlowSlow)"
                   filter="url(#mapGlowReal)"
                 />
               )}
@@ -630,49 +485,34 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           )}
 
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-              MINIMALIST, CLEAN PICKUP MARKERS
-              ● Name                Time on right side
               MINIMALIST PICKUP MARKERS (TIME ON RIGHT SIDE)
               ● Location Name                          Time
               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          {currentTime >= 11.0 && (
-            <g id="indore-pickup-pins">
           {currentTime >= 11.5 && (
             <g id="pickup-markers">
               {TRIP_CONFIG.pickupPoints.map((pt, idx) => {
-                const isPassed = currentTime >= 11.5 + (idx + 1) * 2.1;
                 const isPassed = currentTime >= 12.0 + (idx + 1) * 2.5;
                 const isCurrent = activePickupIdx === idx;
 
                 return (
                   <g key={pt.id} transform={`translate(${pt.svgX}, ${pt.svgY})`}>
-                    {/* Minimalist marker dot */}
                     <circle
                       r={isCurrent ? "4.5" : isPassed ? "3" : "2"}
                       fill={isCurrent ? "#F59E0B" : isPassed ? "#EA580C" : "#71717A"}
-                      filter="url(#mapGlowSlow)"
                       filter="url(#mapGlowReal)"
                     />
                     <circle r="1.5" fill="#FFFFFF" />
 
-                    {/* Extremely Clean, Minimal Itinerary Line: ● Vijay Nagar        8:00 AM */}
                     {/* Clean minimal itinerary label with time on right side */}
                     {isCurrent && (
-                      <g
-                        transform="translate(14, -10)"
-                        className="transition-opacity duration-700 ease-in-out"
-                      >
-                        {/* Minimal translucent backing with subtle border */}
                       <g transform="translate(14, -10)" className="transition-opacity duration-700">
                         <rect
                           x="0"
                           y="-8"
-                          width="110"
                           width="114"
                           height="18"
                           rx="4"
                           fill="#061727"
-                          fillOpacity="0.88"
                           fillOpacity="0.92"
                           stroke="#F59E0B"
                           strokeWidth="0.8"
@@ -688,7 +528,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                           ● {pt.name}
                         </text>
                         <text
-                          x="102"
                           x="106"
                           y="4"
                           textAnchor="end"
@@ -708,28 +547,21 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           )}
 
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-              MAJOR DESTINATION STOP LABELS (CLEAN & SPACIOUS)
               MAJOR DESTINATION LABELS ALONG JOURNEY
               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          {currentTime >= 20.0 && (
-            <g id="destination-pins">
-              {/* STOP 1: RAU CIRCLE (Breakfast Stop) */}
           {currentTime >= 23.0 && (
             <g id="major-stops">
               {/* 07:30 AM — RAU CIRCLE NASHTA */}
               <g transform="translate(450, 496)">
-                <circle r="5" fill="#EA580C" filter="url(#mapGlowSlow)" />
                 <circle r="5.5" fill="#EA580C" filter="url(#mapGlowReal)" />
                 <circle r="2.2" fill="#FFFFFF" />
                 <rect
                   x="12"
                   y="-9"
-                  width="106"
                   width="116"
                   height="20"
                   rx="4"
                   fill="#061727"
-                  fillOpacity="0.88"
                   fillOpacity="0.9"
                   stroke="#EA580C"
                   strokeWidth="0.9"
@@ -738,29 +570,22 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                   RAU CIRCLE
                 </text>
                 <text x="18" y="8" fill="#FDE68A" fontSize="6">
-                  09:20 AM • Nashta Stop
                   07:30 AM • Indori Nashta
                 </text>
               </g>
 
-              {/* STOP 2: JAM GATE (Chai & Mountain Pause) */}
-              {currentTime >= 28.0 && (
               {/* 09:00 AM — JAM GATE CHAI */}
               {currentTime >= 29.5 && (
                 <g transform="translate(468, 545)">
-                  <circle r="5.5" fill="#F59E0B" filter="url(#mapGlowSlow)" />
                   <circle r="5.5" fill="#F59E0B" filter="url(#mapGlowReal)" />
                   <circle r="2.5" fill="#FFFFFF" />
                   <rect
-                    x="-114"
                     x="-120"
                     y="-9"
-                    width="102"
                     width="108"
                     height="20"
                     rx="4"
                     fill="#061727"
-                    fillOpacity="0.88"
                     fillOpacity="0.9"
                     stroke="#F59E0B"
                     strokeWidth="0.9"
@@ -769,29 +594,23 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                     JAM GATE
                   </text>
                   <text x="-18" y="8" textAnchor="end" fill="#FDE68A" fontSize="6">
-                    10:30 AM • Chai Pause
                     09:00 AM • Mountain Chai
                   </text>
                 </g>
               )}
 
-              {/* STOP 3: MAHESHWAR (Dal Bafla & Fort) */}
-              {currentTime >= 34.0 && (
               {/* 11:00 AM — MAHESHWAR */}
               {currentTime >= 36.0 && (
                 <g transform="translate(440, 605)">
-                  <circle r="6" fill="#EA580C" filter="url(#mapGlowSlow)" />
                   <circle r="6" fill="#EA580C" filter="url(#mapGlowReal)" />
                   <circle r="2.8" fill="#FFFFFF" />
                   <rect
                     x="12"
                     y="-9"
-                    width="114"
                     width="122"
                     height="20"
                     rx="4"
                     fill="#061727"
-                    fillOpacity="0.88"
                     fillOpacity="0.9"
                     stroke="#EA580C"
                     strokeWidth="0.9"
@@ -800,40 +619,31 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                     MAHESHWAR
                   </text>
                   <text x="18" y="8" fill="#FDE68A" fontSize="6">
-                    01:00 PM • Dal Bafla Feast
                     11:00 AM • Ahilya Fort & Lunch
                   </text>
                 </g>
               )}
 
-              {/* STOP 4: SHASTRADHARA (Sacred Rapids) */}
-              {currentTime >= 43.5 && (
               {/* 04:00 PM — SAHASTRADHARA */}
               {currentTime >= 47.0 && (
                 <g transform="translate(412, 630)">
-                  <circle r="6" fill="#10B981" filter="url(#mapGlowSlow)" />
                   <circle r="6" fill="#10B981" filter="url(#mapGlowReal)" />
                   <circle r="2.8" fill="#FFFFFF" />
                   <rect
-                    x="-120"
                     x="-130"
                     y="-9"
-                    width="108"
                     width="118"
                     height="20"
                     rx="4"
                     fill="#061727"
-                    fillOpacity="0.88"
                     fillOpacity="0.9"
                     stroke="#10B981"
                     strokeWidth="0.9"
                   />
                   <text x="-18" y="0" textAnchor="end" fill="#FFFFFF" fontSize="7.5" fontWeight="800">
-                    SHASTRADHARA
                     SAHASTRADHARA
                   </text>
                   <text x="-18" y="8" textAnchor="end" fill="#6EE7B7" fontSize="6">
-                    03:45 PM • Sacred Rapids
                     04:00 PM • Sacred Rapids
                   </text>
                 </g>
@@ -843,14 +653,12 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               THE BHARATVISTA LUXURY COACH
-              Slow, controlled vehicle physics; faces heading
               Slow, controlled vehicle physics; faces direction of travel
               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           {bus.visible && (
             <g
               transform={`translate(${bus.x}, ${bus.y})`}
               opacity={bus.opacity}
-              filter="url(#mapGlowSlow)"
               filter="url(#mapGlowReal)"
               className="transition-transform duration-150 ease-linear"
             >
@@ -886,26 +694,18 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </div>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 1: SLOW CINEMATIC BRAND INTRO (0.0s – 5.5s)
-          • Unhurried emergence of BharatVista identity
-          • Luminous gold tagline + animated light sweep
-          • Customer message: "See how your weekend journey could unfold."
           SCENE 1: OPENING — SINGLE LOGO REVEAL & WARM-GOLD TAGLINE (0.0s – 5.0s)
           • Starts immediately on frame 0.0 with intentional brand visual (no empty flash)
           • Logo appears ONLY ONCE
           • Warm-gold tagline + customer message
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime < 5.5 && (
         {currentTime < 5.0 && (
           <motion.div
-            key="scene-1-opening"
-            initial={{ opacity: 0 }}
             key="scene-1-brand-intro"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
             transition={{ duration: 1.1, ease: "easeInOut" }}
             className="absolute inset-0 z-30 flex items-center justify-center bg-[#061727]/85 backdrop-blur-md p-4 overflow-hidden"
           >
@@ -921,13 +721,10 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             <div className="absolute inset-0 bg-gradient-to-t from-[#061727] via-[#061727]/40 to-[#061727]/80" />
 
             <div className="relative z-10 text-center space-y-6 max-w-3xl px-4">
-              {/* Emblem */}
               {/* Single BharatVista Emblem */}
               <motion.div
-                initial={{ scale: 0.88, opacity: 0 }}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
                 transition={{ duration: 1.0, ease: "easeOut" }}
                 className="relative w-22 h-22 sm:w-26 sm:h-26 rounded-full overflow-hidden bg-white p-1.5 shadow-2xl mx-auto ring-2 ring-amber-400/80 shadow-amber-500/20"
               >
@@ -943,40 +740,31 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
               <div className="space-y-4">
                 <motion.h1
-                  initial={{ opacity: 0, y: 14 }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0, delay: 0.3 }}
                   transition={{ duration: 0.9, delay: 0.3 }}
                   className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight"
                 >
                   Welcome to <span className="text-[#EA580C]">BharatVista</span>
                 </motion.h1>
 
-                {/* Tagline Treatment: Warm Gold/Amber Gradient + Luminous Glow */}
                 {/* Tagline: Warm-Gold/Amber Treatment */}
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0, delay: 0.6 }}
                   transition={{ duration: 0.9, delay: 0.6 }}
                   className="relative inline-block py-1"
                 >
-                  <p className="text-2xl sm:text-4xl font-serif font-bold italic tracking-wide bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(245,158,11,0.7)]">
                   <p className="text-2xl sm:text-4xl font-serif font-bold italic tracking-wide bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(245,158,11,0.65)]">
                     &ldquo;{TRIP_CONFIG.tagline}&rdquo;
                   </p>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] animate-[shimmer_3s_infinite]" />
                 </motion.div>
 
-                {/* Customer Message */}
                 {/* Customer Opening Copy */}
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0, delay: 0.9 }}
                   transition={{ duration: 0.9, delay: 0.9 }}
                   className="space-y-1.5 pt-1"
                 >
@@ -988,30 +776,17 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                   </p>
                 </motion.div>
               </div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.0, delay: 1.2 }}
-                className="text-[11px] font-mono text-zinc-400 tracking-[0.28em] uppercase pt-2"
-              >
-                A SLOW CINEMATIC WEEKEND EXPEDITION
-              </motion.p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 2: REAL MADHYA PRADESH DRONE FOOTAGE (7.0s – 11.5s)
-          • Unhurried breathing room for aerial landscape
-          • Long crossfade directly into Indore map (zero blank frames)
           SCENE 2: REAL MADHYA PRADESH DRONE FOOTAGE (7.5s – 12.0s)
           • Soft entrance & unhurried breathing room for Central India
           • Seamless crossfade directly into Indore map
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 7.0 && currentTime < 11.5 && (
         {currentTime >= 7.5 && currentTime < 12.0 && (
           <motion.div
             key="scene-2-mp-drone"
@@ -1041,7 +816,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                 This is MADHYA PRADESH
               </h2>
               <p className="text-sm sm:text-base text-zinc-200 font-serif italic mt-1">
-                Ancient mountains, sacred waters, and the open road.
                 Ancient plateaus, sacred waters, and the open road south.
               </p>
             </div>
@@ -1050,13 +824,10 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 3: LUXURY FLOATING ITINERARY HUD DURING INDORE PICKUPS (11.5s – 22.0s)
-          Pristine layout: ● Vijay Nagar                              8:00 AM
           SCENE 3: LUXURY FLOATING ITINERARY HUD DURING INDORE PICKUPS (12.0s – 24.5s)
           Minimalist, pristine layout: ● Vijay Nagar                         06:45 AM
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 11.5 && currentTime < 22.0 && activePickupIdx >= 0 && activePickupIdx < TRIP_CONFIG.pickupPoints.length && (
         {currentTime >= 12.0 && currentTime < 24.5 && activePickupIdx >= 0 && activePickupIdx < TRIP_CONFIG.pickupPoints.length && (
           <motion.div
             key={`hud-${TRIP_CONFIG.pickupPoints[activePickupIdx].id}`}
@@ -1064,7 +835,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute top-22 sm:top-24 left-1/2 -translate-x-1/2 z-30 w-[90%] max-w-lg"
             className="absolute top-22 sm:top-24 left-1/2 -translate-x-1/2 z-30 w-[92%] max-w-md"
           >
             <div className="px-5 py-2.5 rounded-2xl bg-[#061727]/92 backdrop-blur-xl border border-amber-400/40 shadow-2xl flex items-center justify-between">
@@ -1086,15 +856,11 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 4: RAU CIRCLE — NASHTA (BREAKFAST) STOP (24.2s – 28.5s)
-          • Full-screen morning food cinematography (NOT a small card)
-          • Hot Indori Poha, crisp warm Jalebi & cutting tea
           SCENE 4: RAU CIRCLE — INDORI NASHTA (07:30 AM) (24.5s – 30.0s)
           • Full-screen Indori Poha, samosa, jalebi & cutting tea
           • Rau Circle = NASHTA (Jam Gate = Chai)
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 24.2 && currentTime < 28.5 && (
         {currentTime >= 24.5 && currentTime < 30.0 && (
           <motion.div
             key="scene-4-rau-breakfast"
@@ -1107,7 +873,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             <div className="absolute inset-0">
               <Image
                 src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1920&q=80"
-                alt="Rau Circle Indori Breakfast"
                 alt="Rau Circle Indori Nashta"
                 fill
                 priority
@@ -1120,23 +885,19 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             <div className="relative z-10 max-w-3xl w-full text-center space-y-4">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-mono">
                 <Utensils className="w-3.5 h-3.5 text-amber-400" />
-                <span>STOP 01 • INDORE → RAU CIRCLE ({TRIP_CONFIG.durations.indoreToRau})</span>
                 <span>07:30 AM • RAU CIRCLE • THE BREAKFAST STOP</span>
               </div>
 
               <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
-                Rau Circle: The Breakfast Stop
                 Authentic Indori Nashta
               </h2>
 
               <p className="text-lg sm:text-2xl text-amber-200 font-serif italic max-w-xl mx-auto leading-relaxed">
-                &ldquo;Hot Indori Poha, crisp warm Jalebi & steaming cutting tea. Fuel for the adventure ahead.&rdquo;
                 &ldquo;Hot Indori poha with ratlami sev, crispy samosas, warm golden jalebi & steaming cutting chai.&rdquo;
               </p>
 
               <div className="flex items-center justify-center gap-3 pt-2 flex-wrap text-xs font-mono text-zinc-300">
                 <span className="px-3.5 py-1 rounded-full bg-black/60 border border-white/20">
-                  All 5 Indore Pickups Assembled
                   All 5 Pickups Assembled
                 </span>
                 <span className="px-3.5 py-1 rounded-full bg-black/60 border border-amber-400/40 text-amber-300">
@@ -1152,14 +913,11 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 5: JAM GATE — CHAI & SCENIC MOUNTAIN PAUSE (30.5s – 35.0s)
           SCENE 5: JAM GATE — CHAI & SCENIC VALLEY (09:00 AM) (32.0s – 36.5s)
           • Full-screen Jam Gate Drone Footage
-          • Strictly CHAI STOP (no breakfast/Maggie)
           • Strictly CHAI STOP (no breakfast copy)
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 30.5 && currentTime < 35.0 && (
         {currentTime >= 32.0 && currentTime < 36.5 && (
           <motion.div
             key="scene-5-jamgate"
@@ -1183,7 +941,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
             <div className="absolute bottom-16 left-6 sm:left-12 z-10 max-w-xl text-left">
               <span className="text-xs uppercase tracking-[0.28em] font-semibold text-amber-400 block mb-1">
-                STOP 02 • RAU → JAM GATE ({TRIP_CONFIG.durations.rauToJamGate})
                 09:00 AM • VINDHYACHAL MOUNTAIN PASS
               </span>
               <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
@@ -1198,7 +955,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                   <span>Steaming Adrak Chai in Glass</span>
                 </span>
                 <span className="px-3 py-1 rounded-full bg-black/60 border border-amber-400/40">
-                  Misty Vindhyachal Pass
                   Misty Malwa Valley Views
                 </span>
               </div>
@@ -1208,15 +964,11 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 6A: MAHESHWAR THALI — SLOW FOOD CINEMA (37.0s – 41.5s)
-          • Introduced ONE ITEM AT A TIME like luxury food cinema
-          • Bronze plate -> Dal -> Bafla -> Kadhi -> Rice -> Ladoo -> Full Thali
           SCENE 6A: 01:30 PM MALWA SPECIAL LUNCH — DAL BAFLA THALI (39.5s – 44.0s)
           • Chronological lunch: served traditionally item-by-item
           • Kansa thali -> Dal -> Bafla -> Kadhi -> Rice -> Ladoo -> complete feast
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 37.0 && currentTime < 41.5 && (
         {currentTime >= 39.5 && currentTime < 44.0 && (
           <motion.div
             key="scene-6a-thali"
@@ -1229,7 +981,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             <div className="absolute inset-0 opacity-25">
               <Image
                 src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1920&q=80"
-                alt="Maheshwar Dal Bafla"
                 alt="Malwa Special Lunch"
                 fill
                 priority
@@ -1253,7 +1004,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-left text-white">
                   <span className="text-[10px] uppercase tracking-wider font-bold text-amber-400 block">
-                    ROYAL MALWA THALI SEQUENCE
                     01:30 PM • TRADITIONAL MALWA FEAST
                   </span>
                   <p className="text-sm sm:text-base font-serif font-bold text-amber-100">
@@ -1263,37 +1013,28 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
               </div>
 
               {/* Progressive Item Reveal */}
-              <div className="space-y-4 text-left">
               <div className="space-y-3.5 text-left">
                 <div>
                   <span className="text-xs uppercase tracking-[0.28em] font-semibold text-[#EA580C]">
-                    STOP 03 • JAM GATE → MAHESHWAR ({TRIP_CONFIG.durations.jamGateToMaheshwar})
                     01:30 PM • MAHESHWAR
                   </span>
                   <h2 className="text-2xl sm:text-4xl font-serif font-bold text-white tracking-tight">
-                    The Royal Dal Bafla Feast
                     Malwa Special Lunch
                   </h2>
-                  <p className="text-sm text-zinc-300 font-serif italic">
-                    Served with timeless Malwa hospitality.
                   <p className="text-xs sm:text-sm text-zinc-300 font-serif italic">
                     Ghee-dipped baflas served with Malwa hospitality.
                   </p>
                 </div>
 
-                <div className="space-y-2 pt-1">
-                  {TRIP_CONFIG.thaliSequence.slice(0, 6).map((item) => {
                 <div className="space-y-1.5 pt-1">
                   {TRIP_CONFIG.thaliSequence.slice(0, 7).map((item) => {
                     const isRevealed = activeThaliStep >= item.step;
                     return (
                       <div
                         key={item.step}
-                        className={`flex items-center gap-3 p-2 rounded-xl transition-all duration-400 ${
                         className={`flex items-center gap-3 p-2 rounded-xl transition-all duration-300 ${
                           isRevealed
                             ? "bg-amber-500/20 border border-amber-400/40 text-white"
-                            : "bg-white/5 border border-white/5 text-zinc-500 opacity-40"
                             : "bg-white/5 border border-white/5 text-zinc-500 opacity-30"
                         }`}
                       >
@@ -1321,13 +1062,10 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 6B: MAHESHWAR DRONE FOOTAGE (41.5s – 44.0s)
-          • Full-screen Ahilya Fort & Narmada Stone Ghats
           SCENE 6B: 11:00 AM MAHESHWAR DRONE FOOTAGE (44.0s – 47.0s)
           • Ahilya Fort, sacred stone ghats, Narmada river
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 41.5 && currentTime < 44.0 && (
         {currentTime >= 44.0 && currentTime < 47.0 && (
           <motion.div
             key="scene-6b-maheshwar-drone"
@@ -1351,14 +1089,12 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
             <div className="absolute bottom-16 left-6 sm:left-12 z-10 max-w-xl text-left">
               <span className="text-xs uppercase tracking-[0.28em] font-semibold text-amber-400 block mb-1">
-                SACRED NARMADA CITADEL
                 11:00 AM • QUEEN AHILYABAI&apos;S CITADEL
               </span>
               <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
                 MAHESHWAR
               </h2>
               <p className="text-base sm:text-lg text-amber-200 font-serif italic mt-1">
-                Ahilya Fort, master handlooms, and timeless stone ghats on the river.
                 Walk through the heritage of Maheshwar, from Ahilya Fort and Rajwada to the timeless Narmada ghats.
               </p>
             </div>
@@ -1367,18 +1103,13 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 7: SHASTRADHARA — REAL DRONE RAPIDS (46.5s – 50.5s)
-          • Preceded by bus VISIBLY traveling from Maheshwar (44.0s – 46.5s)
-          • Correct spelling: SHASTRADHARA everywhere
           SCENE 7: 04:00 PM SAHASTRADHARA & BOAT RIDE (50.5s – 54.5s)
           • Preceded by bus VISIBLY traveling from Maheshwar (47.0s – 50.5s)
           • Correct spelling: SAHASTRADHARA
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 46.5 && currentTime < 50.5 && (
         {currentTime >= 50.5 && currentTime < 54.5 && (
           <motion.div
-            key="scene-7-shastradhara"
             key="scene-7-sahastradhara"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1400,15 +1131,12 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
 
             <div className="absolute bottom-16 left-6 sm:left-12 z-10 max-w-xl text-left">
               <span className="text-xs uppercase tracking-[0.28em] font-semibold text-emerald-400 block mb-1">
-                STOP 04 • MAHESHWAR → SHASTRADHARA ({TRIP_CONFIG.durations.maheshwarToShastradhara})
                 04:00 PM • THOUSAND-STREAM RAPIDS
               </span>
               <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
-                SHASTRADHARA
                 SAHASTRADHARA
               </h2>
               <p className="text-lg sm:text-xl text-zinc-200 font-serif italic mt-1">
-                Where the sacred Narmada splits into a thousand churning channels.
                 Sacred Narmada flowing through volcanic rock channels and exhilarating boat rides.
               </p>
             </div>
@@ -1417,9 +1145,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          SCENE 8 & 9: RETURN JOURNEY & FINAL END SCREEN (54.0s – 58.0s+)
-          STRICT REQUIREMENT: Final screen holds for at least 3 FULL SECONDS (holds 4s)
-          ₹700 / person • First 5 customers exclusive gift • Book Your Seat
           SCENE 8: FINAL HERO CTA & BRAND RESOLUTION (56.0s – 62.0s)
           • Holds steadily for at least 3+ full seconds
           • Price: ₹699 / person
@@ -1429,35 +1154,26 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           • Primary CTA: [ Book Your Seat ]
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <AnimatePresence>
-        {currentTime >= 54.0 && (
         {currentTime >= 56.0 && (
           <motion.div
-            key="scene-final-cta"
-            initial={{ opacity: 0, y: 30, scale: 0.97 }}
             key="scene-final-cta-card"
             initial={{ opacity: 0, y: 25, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
             exit={{ opacity: 0, y: 15, scale: 0.97 }}
             transition={{ duration: 1.0, ease: "easeOut" }}
-            className="absolute inset-x-4 bottom-12 sm:bottom-14 z-30 max-w-3xl mx-auto rounded-3xl bg-[#0A2E4C]/96 backdrop-blur-xl border border-amber-400/40 p-6 sm:p-8 shadow-2xl text-center"
             className="absolute inset-x-4 bottom-10 sm:bottom-12 z-30 max-w-3xl mx-auto rounded-3xl bg-[#0A2E4C]/96 backdrop-blur-xl border border-amber-400/40 p-6 sm:p-8 shadow-2xl text-center"
           >
             <div className="space-y-4">
               {/* Circuit Header */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-mono">
                 <Navigation className="w-3.5 h-3.5" />
-                <span>COMPLETE ROUND-TRIP EXPEDITION • {TRIP_CONFIG.returnTimeNotice}</span>
                 <span>COMPLETE ONE-DAY EXPEDITION • RETURN BY 8:30–9:00 PM</span>
               </div>
 
               <h2 className="text-2xl sm:text-4xl font-serif font-black text-white tracking-tight">
-                Indore → Rau Circle → Jam Gate → Maheshwar → Shastradhara → Indore
                 Indore → Rau Circle → Jam Gate → Maheshwar → Sahastradhara → Indore
               </h2>
 
-              {/* Pricing Display */}
-              <div className="py-1">
               {/* Price & Booking Urgency */}
               <div className="py-1 space-y-1">
                 <div className="inline-block text-3xl sm:text-5xl font-serif font-black text-white">
@@ -1466,7 +1182,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                     {TRIP_CONFIG.priceUnit}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-300 mt-1">
                 <p className="text-xs text-amber-300 font-semibold uppercase tracking-wider">
                   Book Your Slot As Soon As Possible
                 </p>
@@ -1475,13 +1190,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                 </p>
               </div>
 
-              {/* Promotional Gift Campaign Card (First 5 Customers) */}
-              <div className="p-3 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center gap-3 text-xs text-amber-200">
-                <Gift className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>
-                  <strong className="text-amber-300 font-bold">{TRIP_CONFIG.promotionalGiftText}</strong>{" "}
-                  {TRIP_CONFIG.promotionalGiftSubtext}
-                </span>
               {/* Group Discount Badge + First 5 Gift */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div className="p-2.5 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center gap-2 text-amber-200">
@@ -1518,7 +1226,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
               </div>
 
               <p className="text-[11px] text-amber-200/80 font-serif italic pt-1">
-                Your weekend. Your story. Calm, unhurried, unforgettable.
                 Your weekend. Your story. Masti, dhamal, sukoon aur ek kahani jo yaad rahe.
               </p>
             </div>
@@ -1527,7 +1234,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
       </AnimatePresence>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          TIMELINE CONTROLS & 8 CHAPTER QUICK-JUMP PILLS
           CLEAN VOYAGE STATUS & CHAPTER SELECTOR (NO EDITOR TIMELINE UI)
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div className="relative z-20 w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-24 sm:pt-28 pb-3 pointer-events-none">
@@ -1535,22 +1241,10 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
         <div className="flex items-center justify-between pointer-events-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061727]/85 backdrop-blur-md border border-white/15 text-xs font-mono text-amber-300 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-semibold text-white">EXPEDITION:</span>
             <span className="font-semibold text-white">ITINERARY:</span>
             <span>
-              {currentTime < 5.5
               {currentTime < 5.0
                 ? "Opening: BharatVista Identity"
-                : currentTime < 11.5
-                ? "Madhya Pradesh Aerials"
-                : currentTime < 22.0
-                ? "Indore Morning Pickups (5 Stops)"
-                : currentTime < 28.5
-                ? "Rau Circle (Nashta Stop)"
-                : currentTime < 35.0
-                ? "Jam Gate (Mountain Chai Pause)"
-                : currentTime < 41.5
-                ? "Maheshwar (Dal Bafla Feast)"
                 : currentTime < 12.0
                 ? "Madhya Pradesh Geography"
                 : currentTime < 24.5
@@ -1560,10 +1254,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                 : currentTime < 36.5
                 ? "09:00 AM • Jam Gate (Mountain Chai)"
                 : currentTime < 44.0
-                ? "Maheshwar (Ahilya Fort & Ghats)"
-                : currentTime < 50.5
-                ? "Shastradhara (Sacred Rapids)"
-                : "Indore Round-Trip Complete • ₹700"}
                 ? "01:30 PM • Malwa Special Lunch (Dal Bafla)"
                 : currentTime < 47.0
                 ? "11:00 AM • Maheshwar (Ahilya Fort & Ghats)"
@@ -1591,43 +1281,11 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
           </div>
         </div>
 
-        {/* Bottom Timeline Controls */}
         {/* Bottom Chapter Pills (Pure Finished Film Navigation, Zero Editor Timeline Numbers) */}
         <div className="pointer-events-auto w-full max-w-3xl mx-auto space-y-2 pb-1">
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] font-mono text-zinc-400 w-9 text-right">
-              {currentTime.toFixed(1)}s
-            </span>
-            <div
-              className="relative flex-1 h-1.5 bg-white/20 hover:h-2.5 rounded-full overflow-hidden cursor-pointer transition-all duration-150"
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const pct = Math.max(0, Math.min(1, clickX / rect.width));
-                handleJumpTo(Math.round(pct * TOTAL_DURATION * 10) / 10);
-              }}
-            >
-              <div
-                className="h-full bg-gradient-to-r from-[#EA580C] via-amber-400 to-emerald-400 transition-all duration-75"
-                style={{ width: `${Math.min(100, (currentTime / TOTAL_DURATION) * 100)}%` }}
-              />
-            </div>
-            <span className="text-[11px] font-mono text-zinc-400 w-9">
-              {TOTAL_DURATION.toFixed(0)}s
-            </span>
-          </div>
-
-          {/* Chapter Quick-Jump Pills */}
           <div className="flex items-center justify-center gap-1 sm:gap-1.5 flex-wrap">
             {[
               { label: "Intro", time: 0 },
-              { label: "MP Drone", time: 7.0 },
-              { label: "Indore Pickups", time: 11.5 },
-              { label: "Rau Nashta", time: 24.2 },
-              { label: "Jam Gate Chai", time: 30.5 },
-              { label: "Dal Bafla", time: 37.0 },
-              { label: "Shastradhara", time: 44.0 },
-              { label: "₹700 Book", time: 54.0 },
               { label: "MP Map", time: 7.5 },
               { label: "Indore Pickups", time: 12.0 },
               { label: "07:30 Nashta", time: 24.5 },
@@ -1639,20 +1297,9 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
             ].map((ch) => {
               const isActive =
                 currentTime >= ch.time &&
-                (ch.time === 54.0 ||
                 (ch.time === 56.0 ||
                   currentTime <
                     (ch.time === 0
-                      ? 7.0
-                      : ch.time === 7.0
-                      ? 11.5
-                      : ch.time === 11.5
-                      ? 24.2
-                      : ch.time === 24.2
-                      ? 30.5
-                      : ch.time === 30.5
-                      ? 37.0
-                      : ch.time === 37.0
                       ? 7.5
                       : ch.time === 7.5
                       ? 12.0
@@ -1664,7 +1311,6 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                       ? 39.5
                       : ch.time === 39.5
                       ? 44.0
-                      : 54.0));
                       : ch.time === 44.0
                       ? 47.0
                       : 56.0));
@@ -1672,11 +1318,9 @@ export default function MasterCinematicHero({ onBookSeatClick }: MasterCinematic
                 <button
                   key={ch.label}
                   onClick={() => handleJumpTo(ch.time)}
-                  className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-mono font-medium transition-all cursor-pointer ${
                   className={`px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-mono font-medium transition-all cursor-pointer ${
                     isActive
                       ? "bg-amber-500 text-black font-bold shadow-md shadow-amber-500/40"
-                      : "bg-black/50 text-zinc-300 hover:text-white hover:bg-black/70 border border-white/10"
                       : "bg-black/60 text-zinc-300 hover:text-white hover:bg-black/80 border border-white/10"
                   }`}
                 >

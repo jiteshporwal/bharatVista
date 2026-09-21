@@ -1,14 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
-import { Users, Compass, Ticket, Heart, Sparkles, Smile } from "lucide-react";
-import { SOLO_TRAVEL_PILLARS } from "@/data/cinematicData";
 import { Users, Compass, Ticket, Heart, Sparkles, Smile, ArrowRight, Bus } from "lucide-react";
 import { TRIP_CONFIG } from "@/data/tripConfig";
 
-export default function SoloTraveller() {
-  const icons = [Users, Compass, Ticket, Heart, Smile];
 interface SoloTravellerProps {
   onBookSeatClick?: () => void;
 }
@@ -58,7 +53,6 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
   ];
 
   return (
-    <section id="solo-traveller" className="relative py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
     <section id="solo-traveller" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -78,16 +72,12 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
         <p className="text-sm sm:text-base text-zinc-300 font-light max-w-xl mx-auto leading-relaxed">
           BharatVista is built for curious souls who want to venture out without
           feeling isolated. Hop on our coach as a solo explorer, travel with fellow
-          adventurers, and make friends over hot Maggie and shared views.
           adventurers, and make friends over hot chai and shared river views.
         </p>
       </div>
 
-      {/* 5 Solo Pillars Grid */}
       {/* 5 Solo Pillars Grid + 6th Action Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {SOLO_TRAVEL_PILLARS.map((pillar, idx) => {
-          const Icon = icons[idx % icons.length];
         {pillars.map((pillar, idx) => {
           const Icon = pillar.icon;
           return (
@@ -96,8 +86,6 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="rounded-3xl p-8 bg-[#0A2E4C]/40 border border-white/10 hover:border-amber-400/40 transition-all duration-300 space-y-4 group shadow-xl"
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="rounded-3xl p-8 bg-[#0A2E4C]/40 border border-white/10 hover:border-amber-400/40 transition-all duration-300 space-y-4 group shadow-xl text-left"
             >
@@ -126,8 +114,6 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="rounded-3xl p-8 bg-gradient-to-br from-[#EA580C]/20 via-[#0A2E4C] to-[#061727] border border-amber-400/30 flex flex-col justify-between space-y-4 shadow-xl"
           transition={{ duration: 0.5, delay: 0.4 }}
           className="rounded-3xl p-8 bg-gradient-to-br from-[#EA580C]/20 via-[#0A2E4C] to-[#061727] border border-amber-400/30 flex flex-col justify-between space-y-4 shadow-xl text-left"
         >
@@ -139,22 +125,15 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
               Your Seat is Waiting
             </h3>
             <p className="text-xs sm:text-sm text-zinc-200 font-light leading-relaxed">
-              No need to convince an entire squad to coordinate dates. Just book your seat
-              for ₹700 and show up in Indore at 07:00 AM!
               No need to convince an entire squad to coordinate dates. Just reserve your seat
               for ₹{TRIP_CONFIG.price} and show up in Indore at 06:45 AM!
             </p>
           </div>
 
-          <a
-            href="#hero-journey"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:shadow-lg hover:shadow-[#EA580C]/40 transition-all cursor-pointer"
           <button
             onClick={onBookSeatClick}
             className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 transition-all cursor-pointer"
           >
-            <span>Book Your Single Seat</span>
-          </a>
             <Bus className="w-4 h-4" />
             <span>Book Your Single Seat • ₹{TRIP_CONFIG.price}</span>
             <ArrowRight className="w-4 h-4" />
@@ -164,4 +143,3 @@ export default function SoloTraveller({ onBookSeatClick }: SoloTravellerProps) {
     </section>
   );
 }
-

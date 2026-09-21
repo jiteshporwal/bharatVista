@@ -29,7 +29,6 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, mobile, email, travellers = 1, pickupPoint, travelDate } = body;
     const {
       name,
       mobile,
@@ -43,18 +42,14 @@ export async function POST(request: Request) {
       notes,
     } = body;
 
-    // Validate essential fields
-    if (!name || !mobile || !email) {
     // Mobile is strictly REQUIRED; Name is required; Email is OPTIONAL
     if (!mobile || !String(mobile).trim()) {
       return NextResponse.json(
-        { error: "Name, mobile number, and email are required." },
         { error: "Mobile number is required so our team can reach you on WhatsApp/call." },
         { status: 400 }
       );
     }
 
-    // Clean, structured booking reference
     if (!name || !String(name).trim()) {
       return NextResponse.json(
         { error: "Please provide your full name." },
@@ -66,7 +61,6 @@ export async function POST(request: Request) {
     const bookingId = `BV-${Date.now().toString().slice(-6)}`;
     const timestamp = new Date().toISOString();
 
-    const bookingRecord = {
     // 20% discount for 4 or more travellers
     const baseTotal = count * 699;
     const discountApplied = count >= 4 ? Math.round(baseTotal * 0.2) : 0;
@@ -76,13 +70,6 @@ export async function POST(request: Request) {
       bookingId,
       name: String(name).trim(),
       mobile: String(mobile).trim(),
-      email: String(email).trim().toLowerCase(),
-      travellers: Number(travellers) || 1,
-      pickupPoint: pickupPoint || "vijay-nagar",
-      travelDate: travelDate || "2026-10-04",
-      status: "CONFIRMED",
-      amountPerPerson: 700,
-      totalAmount: (Number(travellers) || 1) * 700,
       email: email ? String(email).trim().toLowerCase() : undefined,
       travellers: count,
       pickupPoint: String(pickupPoint),
@@ -94,25 +81,20 @@ export async function POST(request: Request) {
       discountApplied,
       totalAmount,
       createdAt: timestamp,
-      qualifiesForExclusiveGift: true, // First 5 customers campaign
     };
 
-    console.log("[BharatVista Booking API] New seat booking registered:", bookingRecord);
     bookingsStore.push(record);
     console.log("[BharatVista Enquiry] Successfully registered:", record);
 
     return NextResponse.json(
       {
         success: true,
-        message: "Seat reservation confirmed successfully.",
-        booking: bookingRecord,
         message: "Enquiry successfully registered.",
         booking: record,
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("[BharatVista Booking API] Error processing reservation:", error);
     console.error("[BharatVista Booking API Error]:", error);
     return NextResponse.json(
       { error: "Internal server error occurred while processing reservation." },
@@ -120,4 +102,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

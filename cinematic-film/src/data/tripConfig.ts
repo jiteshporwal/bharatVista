@@ -1,10 +1,6 @@
 /**
  * Centralized Configuration for BharatVista Travel Expeditions
  *
- * All pricing, promotional copy, pickup schedules, leg durations,
- * and stop itineraries are defined here. Any changes made to this file
- * automatically propagate across the entire cinematic film, booking modal,
- * and secondary marketing components.
  * All pricing, promotional copy, contact numbers, pickup schedules,
  * dynamic weekend calculations, itinerary, and experiences are defined here.
  */
@@ -18,7 +14,6 @@ export interface PickupPointConfig {
   svgY: number;
 }
 
-export interface TravelStopConfig {
 export interface ItineraryItem {
   time: string;
   title: string;
@@ -30,8 +25,6 @@ export interface ItineraryItem {
 
 export interface ExperienceItem {
   id: string;
-  name: string;
-  type: "breakfast" | "chai-pause" | "cultural-lunch" | "rapids" | "return";
   title: string;
   time: string;
   shortDesc: string;
@@ -43,10 +36,6 @@ export interface ExperienceItem {
 export function getUpcomingWeekends(referenceDate: Date = new Date()): {
   value: string;
   label: string;
-  timeLabel: string;
-  description: string;
-  svgX: number;
-  svgY: number;
   day: "Saturday" | "Sunday";
 }[] {
   const currentYear = referenceDate.getFullYear();
@@ -99,14 +88,10 @@ export const TRIP_CONFIG = {
   brandName: "BharatVista",
   tagline: "हर सफ़र एक नई कहानी",
   customerMessage: {
-    lead: "See how your weekend journey could unfold.",
-    sub: "Book a wonderful weekend with BharatVista.",
     lead: "See how your weekend could unfold.",
     sub: "A little masti. A little dhamal. A lot of memories.",
   },
 
-  // Pricing & Commercial
-  price: 700,
   // Contact Information
   phones: {
     primary: "7415905851",
@@ -120,8 +105,6 @@ export const TRIP_CONFIG = {
   // Pricing & Commercials
   price: 699,
   currency: "₹",
-  priceUnit: "/ PERSON",
-  inclusionsSummary: "Includes luxury coach, Rau breakfast, Jam Gate chai & Maheshwar royal lunch",
   priceUnit: "/ person",
   inclusionsSummary: "Includes luxury coach travel, Rau breakfast, Jam Gate chai & traditional Malwa lunch",
 
@@ -139,24 +122,11 @@ export const TRIP_CONFIG = {
   promotionalGiftText: "First 5 customers get an exclusive gift from BharatVista.",
   promotionalGiftSubtext: "Early explorer gift pack & framed journey souvenir included with the first 5 confirmed bookings.",
 
-  // Dates & Schedule
-  tripDate: "Sunday, 04 October 2026",
-  availableDates: [
-    { value: "2026-10-04", label: "Sunday, 04 October 2026 (Upcoming Weekend)" },
-    { value: "2026-10-11", label: "Sunday, 11 October 2026" },
-    { value: "2026-10-18", label: "Sunday, 18 October 2026" },
-    { value: "2026-10-25", label: "Sunday, 25 October 2026" },
-  ],
-  returnTimeNotice: "Day trip • Return to Indore by 8–9 PM",
-
-  // 5 Indore Pickup Points with increased visual spacing
-  // Indore Pickups (Explicit Schedule per instructions)
+  // Indore Pickups (Explicit Schedule)
   pickupPoints: [
     {
       id: "vijay-nagar",
       name: "Vijay Nagar",
-      time: "8:00 AM",
-      landmark: "Vijay Nagar Square (Near C21)",
       time: "06:45 AM",
       landmark: "Vijay Nagar Square",
       svgX: 496,
@@ -165,7 +135,6 @@ export const TRIP_CONFIG = {
     {
       id: "bengali-sq",
       name: "Bengali Square",
-      time: "8:15 AM",
       time: "07:00 AM",
       landmark: "Bengali Square Flyover",
       svgX: 518,
@@ -174,7 +143,6 @@ export const TRIP_CONFIG = {
     {
       id: "teen-imli",
       name: "Teen Imli",
-      time: "8:30 AM", // Configurable
       time: "07:10 AM",
       landmark: "Teen Imli Bridge",
       svgX: 500,
@@ -183,7 +151,6 @@ export const TRIP_CONFIG = {
     {
       id: "it-park",
       name: "IT Park",
-      time: "8:45 AM", // Configurable
       time: "07:18 AM",
       landmark: "IT Park Main Gate",
       svgX: 478,
@@ -192,7 +159,6 @@ export const TRIP_CONFIG = {
     {
       id: "rajiv-gandhi",
       name: "Rajiv Gandhi",
-      time: "9:00 AM", // Configurable
       time: "07:25 AM",
       landmark: "Rajiv Gandhi Square",
       svgX: 462,
@@ -200,17 +166,6 @@ export const TRIP_CONFIG = {
     },
   ] as PickupPointConfig[],
 
-  // Major Itinerary Stops
-  stops: {
-    rauCircle: {
-      id: "rau-circle",
-      name: "Rau Circle",
-      type: "breakfast",
-      label: "Rau Circle: The Breakfast Stop",
-      timeLabel: "09:20 AM • Morning Nashta",
-      description: "Hot Indori Poha, crisp warm Jalebi & cutting tea. Fuel for the adventure ahead.",
-      svgX: 450,
-      svgY: 496,
   // Full Day Itinerary (Chronological Order)
   itinerary: [
     {
@@ -221,15 +176,6 @@ export const TRIP_CONFIG = {
       highlight: "The road south opens up",
       image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
     },
-    jamGate: {
-      id: "jam-gate",
-      name: "Jam Gate",
-      type: "chai-pause",
-      label: "Jam Gate: A Quick Chai Break",
-      timeLabel: "10:30 AM • Mountain Pass",
-      description: "A little pause. A lot of memories. Steaming ginger adrak chai in glass over the Vindhyachals.",
-      svgX: 468,
-      svgY: 545,
     {
       time: "07:30 AM",
       title: "Rau Circle — Indori Nashta",
@@ -238,15 +184,6 @@ export const TRIP_CONFIG = {
       highlight: "Authentic Indori breakfast",
       image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80",
     },
-    maheshwar: {
-      id: "maheshwar",
-      name: "Maheshwar",
-      type: "cultural-lunch",
-      label: "Maheshwar: Royal Dal Bafla Lunch",
-      timeLabel: "01:00 PM • Holy Narmada",
-      description: "Seat of Queen Ahilyabai Holkar. Sandstone ghats, royal fort & traditional Malwa feast.",
-      svgX: 440,
-      svgY: 605,
     {
       time: "09:00 AM",
       title: "Jam Gate — Chai & Scenic Valley",
@@ -255,15 +192,6 @@ export const TRIP_CONFIG = {
       highlight: "Misty mountain pass",
       image: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=1200&q=80",
     },
-    shastradhara: {
-      id: "shastradhara",
-      name: "Shastradhara",
-      type: "rapids",
-      label: "Shastradhara: Sacred Narmada Rapids",
-      timeLabel: "03:45 PM • Natural Wonder",
-      description: "Where Narmada churns through a thousand volcanic channels.",
-      svgX: 412,
-      svgY: 630,
     {
       time: "11:00 AM",
       title: "Maheshwar — Ahilya Fort & Heritage",
@@ -272,7 +200,6 @@ export const TRIP_CONFIG = {
       highlight: "Royal Holkar citadel",
       image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
     },
-  } as Record<string, TravelStopConfig>,
     {
       time: "01:30 PM",
       title: "Malwa Special Lunch — Dal Bafla",
@@ -324,16 +251,9 @@ export const TRIP_CONFIG = {
     shastradharaToIndore: "~2 hrs • Evening Return to Indore (8–9 PM)",
   },
 
-  // Sequential Thali Presentation steps for Maheshwar (Slow Food Cinema)
-  thaliSequence: [
   // The 8 Authentic BharatVista Experiences (4 per row on desktop)
   experiences: [
     {
-      step: 1,
-      name: "Traditional Bronze Thali",
-      hindi: "कांस्य थाली",
-      detail: "Hand-cast Kansa plate placed with ceremonial dignity",
-      highlight: "Base plate arranged",
       id: "indori-nashta",
       title: "Indori Nashta",
       time: "07:30 AM",
@@ -343,11 +263,6 @@ export const TRIP_CONFIG = {
       tag: "Culinary Break",
     },
     {
-      step: 2,
-      name: "Slow-Cooked Tuvar Dal",
-      hindi: "दाल",
-      detail: "Rich tuvar dal tempered with desi ghee, hing, and roasted cumin",
-      highlight: "Poured steaming hot",
       id: "jam-gate-chai",
       title: "Jam Gate Chai",
       time: "09:00 AM",
@@ -357,11 +272,6 @@ export const TRIP_CONFIG = {
       tag: "Mountain Pass",
     },
     {
-      step: 3,
-      name: "Pure Ghee-Dipped Bafla",
-      hindi: "दाल बाफले",
-      detail: "Golden wheat bafle, boiled & ember-baked, crushed and dipped in pure desi ghee",
-      highlight: "Ghee indulgence",
       id: "ahilya-fort",
       title: "Ahilya Fort",
       time: "11:00 AM",
@@ -371,11 +281,6 @@ export const TRIP_CONFIG = {
       tag: "Royal Heritage",
     },
     {
-      step: 4,
-      name: "Spiced Malwa Kadhi",
-      hindi: "कढ़ी",
-      detail: "Slow-simmered spiced buttermilk kadhi with fenugreek & mustard seeds",
-      highlight: "Aromatic Malwa gravy",
       id: "narmada-ghats",
       title: "Narmada Ghats",
       time: "12:00 PM",
@@ -385,11 +290,6 @@ export const TRIP_CONFIG = {
       tag: "Riverside Sukoon",
     },
     {
-      step: 5,
-      name: "Steamed Basmati Rice",
-      hindi: "चावल",
-      detail: "Long-grain fragrant rice served hot with fresh coriander",
-      highlight: "Freshly steamed",
       id: "dal-bafla",
       title: "Dal Bafla",
       time: "01:30 PM",
@@ -399,11 +299,6 @@ export const TRIP_CONFIG = {
       tag: "Traditional Feast",
     },
     {
-      step: 6,
-      name: "Golden Churma Ladoo",
-      hindi: "चूरमा लड्डू",
-      detail: "Handcrafted jaggery, cardamom and dry-fruit churma sweet",
-      highlight: "Sweet conclusion",
       id: "maheshwari-handloom",
       title: "Maheshwari Handloom",
       time: "02:30 PM",
@@ -413,11 +308,6 @@ export const TRIP_CONFIG = {
       tag: "Artisan Craft",
     },
     {
-      step: 7,
-      name: "Complete Royal Feast",
-      hindi: "सम्पूर्ण मालवा थाली",
-      detail: "Served with warmth overlooking the stone ghats and Ahilya Fort",
-      highlight: "Authentic MP tradition",
       id: "sahastradhara",
       title: "Sahastradhara",
       time: "04:00 PM",
