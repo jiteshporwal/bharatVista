@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-royal-navy: #0A2E4C;
+  --color-midnight-sky: #061727;
+  --color-sunset-saffron: #EA580C;
+  --color-temple-gold: #D97706;
+  --color-kerala-emerald: #047857;
+  --color-sandstone: #C2410C;
+  --color-warm-ivory: #FAFAF8;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+:root {
+  --background: #061727;
+  --foreground: #FAFAF8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #061727;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #EA580C;
+}
+
+/* Cinematic film grain & vignette effects */
+.cinematic-vignette {
+  box-shadow: inset 0 0 120px rgba(6, 23, 39, 0.85);
+}
+
+.frosted-glass {
+  background: rgba(6, 23, 39, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FDE68A 0%, #D97706 50%, #B45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.saffron-gradient-text {
+  background: linear-gradient(135deg, #FFEDD5 0%, #EA580C 70%, #C2410C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

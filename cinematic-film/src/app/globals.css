@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-royal-navy: #0A2E4C;
+  --color-midnight-sky: #061727;
+  --color-sunset-saffron: #EA580C;
+  --color-temple-gold: #D97706;
+  --color-sandstone: #D4A373;
+  --color-warm-cream: #FFFDF9;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+:root {
+  --background: #061727;
+  --foreground: #FFFDF9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Atmospheric scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #061727;
+}
+::-webkit-scrollbar-thumb {
+  background: #0A2E4C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #EA580C;
+}
+
+/* Subtle map glow */
+.map-glow {
+  filter: drop-shadow(0 0 16px rgba(234, 88, 12, 0.45));
+}
+

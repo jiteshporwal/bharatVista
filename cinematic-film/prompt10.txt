@@ -1,0 +1,1358 @@
+<USER_REQUEST>
+Build/refine the BharatVista website hero experience as a **premium cinematic travel film**, not a normal landing page, slideshow, card layout, or generic travel website.
+
+The existing BharatVista concept is good. **Do not rebuild it from scratch or damage the existing working parts.** Improve the cinematic flow, transitions, timing, visual hierarchy, performance, and storytelling.
+
+The experience should feel like a premium Indian travel brand film that makes a visitor feel:
+
+**“This is what my weekend journey with BharatVista could feel like.”**
+
+Brand:
+**BharatVista**
+
+Tagline:
+**हर सफ़र एक नई कहानी**
+
+Main CTA:
+**Book Your Seat**
+
+---
+
+# 1. CORE EXPERIENCE RULE
+
+Create one continuous cinematic timeline.
+
+Do NOT make every scene an independent animation with separate timers.
+
+The entire experience should have one coordinated timeline controlling:
+
+* map animation
+* map zoom
+* bus movement
+* pickup points
+* travel duration labels
+* destination transitions
+* videos
+* food visuals
+* typography
+* music
+* final CTA
+
+The animation must feel like **one continuous travel film**.
+
+Do NOT force the experience to exactly 30 seconds.
+
+30 seconds is only an approximate storytelling reference.
+
+If the complete journey needs 24 seconds, 27 seconds, 32 seconds, etc., that is acceptable.
+
+**Never insert an empty/blank second just to reach 30 seconds.**
+
+Every frame must have a purpose.
+
+---
+
+# 2. FIRST SCREEN — CINEMATIC BRAND INTRO
+
+The first screen must remain a full-screen cinematic hero.
+
+The header must appear **inside the hero**, not as a separate website section above it.
+
+Use the real BharatVista logo/map asset provided by me.
+
+Do NOT recreate the map using AI.
+
+Do NOT use Google Maps.
+
+Do NOT use an approximate India map.
+
+Do NOT replace my actual BharatVista geographic/map asset.
+
+If the provided map/logo is not high enough resolution for the hero, preserve the original aspect ratio and tell me that a higher-resolution/16:9 version is required instead of stretching or distorting it.
+
+## Opening visual
+
+Start softly.
+
+No sudden appearance.
+
+No hard pop-in.
+
+Use:
+
+* very subtle fade-in
+* cinematic depth
+* slow camera movement
+* gentle scale
+* soft atmospheric lighting
+* premium typography animation
+
+The BharatVista identity should gradually emerge.
+
+Then show:
+
+**Welcome to BharatVista**
+
+followed by:
+
+**हर सफ़र एक नई कहानी**
+
+---
+
+# 3. TAGLINE COLOR TREATMENT
+
+Do NOT keep:
+
+**हर सफ़र एक नई कहानी**
+
+in plain yellow.
+
+Make the tagline visually special and highly highlighted.
+
+Use an attractive premium color treatment that works with the BharatVista visual identity.
+
+Possible treatment:
+
+* warm gold
+* amber
+* subtle cream/gold gradient
+* slight luminous highlight
+* elegant text glow
+* animated light sweep
+
+Do not make it look cheap, neon, or overly flashy.
+
+The tagline should become one of the memorable visual moments of the opening.
+
+---
+
+# 4. CINEMATIC MESSAGE
+
+Along with the tagline, introduce a short customer-facing message.
+
+The idea should communicate:
+
+“This is what your journey could look like.”
+
+Use premium, emotionally attractive copy such as:
+
+**“See how your weekend journey could unfold.”**
+
+Then:
+
+**“Book a wonderful weekend with BharatVista.”**
+
+The copy should be short.
+
+Do NOT create a paragraph.
+
+Do NOT overcrowd the screen.
+
+The message should feel like a cinematic film title/subtitle.
+
+Use elegant typography and a subtle fade/slide animation.
+
+---
+
+# 5. TRANSITION TO INDIA / MADHYA PRADESH
+
+After the introduction:
+
+The BharatVista map should gradually become the main visual.
+
+The map should fill the screen.
+
+Then create a cinematic camera movement:
+
+**India → Madhya Pradesh → route area**
+
+The camera should smoothly zoom into Madhya Pradesh.
+
+Do NOT show a blank transition screen.
+
+Do NOT show a loading-looking frame.
+
+Do NOT suddenly jump from India to MP.
+
+The zoom should feel like a cinematic camera travelling toward the destination.
+
+---
+
+# 6. MP DRONE VIDEO
+
+At the appropriate moment, transition from the map into the real MP drone footage that I provide.
+
+This must feel like:
+
+**Map → geographic zoom → real-world landscape**
+
+NOT:
+
+**Map → rectangular video card**
+
+The drone footage must become a full-screen cinematic background.
+
+Use:
+
+* soft crossfade
+* controlled scale
+* subtle cinematic motion
+* color consistency
+* no hard cut
+* no visible loading flash
+* no blank frame
+
+The transition into the MP footage should be one of the premium moments of the hero.
+
+---
+
+# 7. NO BLANK 1-SECOND FRAME
+
+There is currently a moment after the MP video where the screen becomes blank for approximately one second.
+
+REMOVE THIS COMPLETELY.
+
+There must never be an unexplained blank screen between scenes.
+
+Instead:
+
+**MP cinematic footage → cinematic fade/zoom → map naturally reappears → bus journey begins**
+
+The transition should feel intentional.
+
+---
+
+# 8. INDORE PICKUP JOURNEY
+
+After MP, transition naturally back to the actual map.
+
+Zoom into Indore.
+
+Show the BharatVista bus beginning its journey.
+
+Pickup locations:
+
+1. Vijay Nagar
+2. Bengali Square
+3. Teen Imli
+4. IT Park
+5. Rajiv Gandhi
+
+Use the actual geographic relationship between the locations.
+
+The bus must travel along a believable road-like route.
+
+---
+
+# 9. IMPORTANT — BUS ORIENTATION
+
+The bus must NOT appear to slide sideways across the map like a landscape animation.
+
+The bus should look as though it is **driving along a road toward the destination**.
+
+As the bus changes direction:
+
+* rotate the bus
+* orient the front of the bus toward the direction of travel
+* smoothly interpolate rotation
+* use a curved/road-like route where appropriate
+* avoid sudden 90° snapping
+* avoid sideways movement without rotation
+
+The bus should visually communicate:
+
+**“The bus is driving there.”**
+
+not:
+
+**“An icon is moving across a map.”**
+
+If necessary, create a subtle road/path line underneath the bus.
+
+---
+
+# 10. SPACE BETWEEN LOCATIONS
+
+Do NOT place all pickup points too close together.
+
+Create enough visual space between locations so that:
+
+* labels remain readable
+* the bus movement is visible
+* the route can breathe
+* the animation does not look crowded
+* the viewer can understand where the bus is going
+
+The map camera may subtly pan/zoom as the bus travels.
+
+Do not keep the entire Indore map static if that makes the movement difficult to understand.
+
+---
+
+# 11. PICKUP TIMINGS
+
+Show the pickup time elegantly near each pickup point.
+
+Initial timings:
+
+**Vijay Nagar — 8:00 AM**
+
+**Bengali Square — 8:15 AM**
+
+The remaining pickup timings will be provided later.
+
+Therefore, make pickup times **data-driven/configurable**.
+
+Do NOT hard-code the remaining times into the animation.
+
+Example visual:
+
+**Vijay Nagar**
+**8:00 AM**
+
+Then the bus reaches the point, gently pauses, and continues.
+
+For Bengali Square:
+
+**Bengali Square**
+**8:15 AM**
+
+Again, the bus should pause naturally.
+
+The timing should feel like part of the travel film, not like a spreadsheet.
+
+---
+
+# 12. PICKUP ANIMATION
+
+When the bus reaches a pickup point:
+
+* slow down
+* gently pause
+* highlight the pickup marker
+* show location name
+* show pickup time
+* subtle glow/pulse
+* then smoothly accelerate toward the next point
+
+Do not use aggressive marker animations.
+
+Everything should be premium and restrained.
+
+---
+
+# 13. RAU CIRCLE — NASHTA STOP
+
+After the pickup journey, the bus travels toward:
+
+**Rau Circle**
+
+Show the route duration/time on the map in a cinematic manner.
+
+The map should communicate:
+
+**Indore → Rau Circle**
+
+Then, when the bus reaches Rau Circle:
+
+Do NOT immediately jump to a food card.
+
+Instead use:
+
+**Bus arrives → gentle stop → cinematic transition → full-screen food experience**
+
+---
+
+# 14. RAU CIRCLE FOOD VISUAL
+
+Create a beautiful cinematic food sequence representing the breakfast/nashta stop.
+
+The food visual should occupy the **full screen**.
+
+Do NOT make it a small card.
+
+Do NOT use a standard grid of food cards.
+
+Use cinematic food photography/video.
+
+If I provide a 2-second breakfast/nashta video, use it.
+
+If the supplied footage is longer, intelligently select the strongest section.
+
+If no suitable footage is available, create a replaceable placeholder and tell me exactly what footage/photo asset is needed.
+
+The visual should feel like:
+
+* morning
+* fresh food
+* Indian travel breakfast
+* warm atmosphere
+* people beginning their journey
+* premium food cinematography
+
+Possible sequence:
+
+**Bus arrives**
+
+→ soft transition
+
+→ close-up of breakfast
+
+→ food being served
+
+→ steam/detail/texture
+
+→ people enjoying the stop
+
+→ subtle final food shot
+
+Then softly transition back to the journey.
+
+The breakfast section should be approximately **2 seconds or as long as necessary to communicate the moment properly**.
+
+Do not speed up footage unnaturally just to satisfy a fixed duration.
+
+---
+
+# 15. IMPORTANT — FOOD VIDEO REQUEST
+
+If I have not provided suitable breakfast footage, do not break the website.
+
+Tell me that I need a cinematic **2–3 second Rau Circle nashta video**, preferably:
+
+* 16:9
+* high resolution
+* natural morning lighting
+* close-up food shots
+* food being served
+* Indian breakfast atmosphere
+* cinematic camera movement
+
+The implementation must make this asset easy to replace later.
+
+---
+
+# 16. RAU CIRCLE → JAM GATE
+
+After the breakfast sequence:
+
+The bus should visibly leave Rau Circle.
+
+Return to the map.
+
+Show the route:
+
+**Rau Circle → Jam Gate**
+
+Display the approximate travel duration elegantly on the map.
+
+The duration should be configurable.
+
+The bus should travel along the route and remain properly oriented toward Jam Gate.
+
+Use a smooth camera follow.
+
+Then transition from the map into the Jam Gate cinematic footage.
+
+---
+
+# 17. JAM GATE CINEMATIC VISUAL
+
+Use the Jam Gate drone footage that I provide.
+
+Make it full-screen.
+
+Do NOT place it inside a rectangular card.
+
+Do NOT make it look like a YouTube video.
+
+It should feel like a scene from a travel film.
+
+Use:
+
+* drone movement
+* slow cinematic zoom if appropriate
+* subtle crossfade
+* natural environmental sound if desired
+* continuous background music
+
+If I provide multiple Jam Gate clips, choose the strongest moments automatically.
+
+Do not force every clip into the timeline.
+
+---
+
+# 18. JAM GATE CHAI
+
+At Jam Gate, the experience should communicate:
+
+**Chai stop**
+
+Important:
+
+Jam Gate is NOT the breakfast stop.
+
+Breakfast/nashta is at Rau Circle.
+
+At Jam Gate, show only the chai/travel-break feeling.
+
+Keep the text minimal.
+
+Example:
+
+**Jam Gate**
+
+**A quick chai break.**
+
+Do not show breakfast/Maggie text here.
+
+---
+
+# 19. JAM GATE → MAHESHWAR
+
+After the Jam Gate cinematic sequence:
+
+Return smoothly to the map.
+
+Show:
+
+**Jam Gate → Maheshwar**
+
+Show the approximate travel duration on the map.
+
+The bus should move toward Maheshwar and remain oriented toward its destination.
+
+Again:
+
+No sideways icon sliding.
+
+No abrupt rotation.
+
+No cramped route.
+
+Use enough map space for the journey to be visually understandable.
+
+---
+
+# 20. MAHESHWAR DAL BAFLE THALI — HERO FOOD SEQUENCE
+
+When the bus reaches Maheshwar:
+
+Create a premium full-screen food cinematography sequence.
+
+This is an important emotional scene.
+
+Show a beautiful traditional Indian thali.
+
+The food should be introduced **one item at a time**, like a cinematic food commercial.
+
+For example:
+
+1. Thali/plate is placed.
+2. Dal is served.
+3. Bafle are placed.
+4. Kadhi is served.
+5. Rice is added.
+6. Ladoo/sweet is placed.
+7. Other appropriate accompaniments are added.
+8. Final full thali reveal.
+
+Use close-ups, slow motion where appropriate, shallow depth of field, warm natural lighting, and smooth camera movement.
+
+The final shot should reveal the complete thali.
+
+Do NOT make it look like a static restaurant menu.
+
+Do NOT create separate cards for each food.
+
+This should feel like a **premium cinematic food advertisement**.
+
+The visual may use a traditional/Rajasthani-style presentation if visually appropriate, but do not falsely label the cuisine as Rajasthani unless the actual food/source establishes that.
+
+---
+
+# 21. MAHESHWAR CINEMATIC VISUAL
+
+After the thali:
+
+Transition into the supplied Maheshwar drone/cinematic footage.
+
+Full-screen.
+
+Show the beauty and heritage of Maheshwar.
+
+Possible visual moments:
+
+* Narmada
+* ghats
+* Maheshwar Fort
+* temples
+* heritage architecture
+* river views
+* evening/golden light if available
+
+Use whichever footage I provide.
+
+Do not overload the screen with text.
+
+The footage should be the hero.
+
+---
+
+# 22. MAHESHWAR → SHASTRADHARA
+
+After Maheshwar:
+
+Return to the map.
+
+Show:
+
+**Maheshwar → Shastradhara**
+
+Use the correct spelling everywhere:
+
+**Shastradhara**
+
+Show the travel duration on the map.
+
+Move the bus along the route.
+
+The bus must face the direction of travel.
+
+Use a smooth route-following animation.
+
+Then transition into the supplied Shastradhara cinematic footage.
+
+---
+
+# 23. SHASTRADHARA CINEMATIC VISUAL
+
+Use my supplied Shastradhara footage.
+
+Full-screen cinematic presentation.
+
+No card.
+
+No generic slideshow.
+
+No blank frame before or after it.
+
+The transition should be:
+
+**map → destination → real footage**
+
+and then:
+
+**real footage → map**
+
+using smooth cinematic transitions.
+
+---
+
+# 24. RETURN JOURNEY
+
+After Shastradhara:
+
+Show the bus beginning its return journey toward Indore.
+
+Zoom the map outward enough to show the complete journey.
+
+The final route visualization should communicate:
+
+**Indore → Rau Circle → Jam Gate → Maheshwar → Shastradhara → Indore**
+
+Do this elegantly.
+
+The map should not become a cluttered infographic.
+
+Use subtle route lines and destination markers.
+
+The camera can slowly zoom out while the bus travels back toward Indore.
+
+This should feel like the conclusion of the journey.
+
+---
+
+# 25. CINEMATIC ENDING
+
+The final transition must NOT feel like:
+
+“animation finished → suddenly show website CTA.”
+
+Instead:
+
+The return journey gradually slows.
+
+The music reaches an emotional/premium peak.
+
+The map gently fades or transitions into the final BharatVista brand composition.
+
+Then show:
+
+**₹700 / person**
+
+and:
+
+**Book Your Seat**
+
+Then promotional copy:
+
+**First 5 customers get an exclusive gift from BharatVista.**
+
+Use a beautiful gift-wrapped visual/photograph/video beside or behind the message.
+
+The gift visual should feel premium.
+
+Do not use cheap-looking stock graphics.
+
+---
+
+# 26. FINAL CTA
+
+The final screen should be extremely clear.
+
+Example hierarchy:
+
+**Your weekend.
+Your story.**
+
+**₹700 / person**
+
+**First 5 customers get an exclusive gift from BharatVista.**
+
+Then one prominent button:
+
+**Book Your Seat**
+
+Only ONE primary CTA button.
+
+Do not show 5 competing buttons.
+
+The CTA should have a subtle premium hover animation.
+
+---
+
+# 27. BOOKING FLOW
+
+When the user clicks:
+
+**Book Your Seat**
+
+open a clean booking/info experience.
+
+It can be:
+
+* dedicated booking page
+  OR
+* premium modal
+
+depending on the existing application architecture.
+
+Collect:
+
+* Full Name
+* Mobile Number
+* Email
+* Number of Travellers
+* Pickup Point
+* Trip
+* Date, if applicable
+
+Then save the information to the backend.
+
+The backend structure should be clean and production-ready.
+
+Do NOT expose sensitive backend credentials in frontend code.
+
+Do NOT pretend the booking is successful unless the backend confirms it.
+
+Show a proper success state after successful submission.
+
+---
+
+# 28. PROMOTIONAL TEXT MUST BE CONFIGURABLE
+
+Make promotional content configurable.
+
+For example:
+
+* current price
+* gift message
+* number of promotional gifts
+* trip date
+* pickup timings
+* travel durations
+
+Do not scatter these values throughout the UI code.
+
+Create a central configuration/data object so I can change them later.
+
+For example conceptually:
+
+tripConfig = {
+price,
+promotionalGiftCount,
+pickupPoints,
+travelDurations,
+tripDate
+}
+
+The actual implementation can follow the existing project's architecture.
+
+---
+
+# 29. VIDEO HANDLING / LARGE SOURCE FILES
+
+I may provide large drone videos.
+
+Do NOT require me to manually cut every video.
+
+When I provide a video:
+
+1. Inspect its format.
+2. Inspect codec.
+3. Inspect resolution.
+4. Inspect FPS.
+5. Inspect duration.
+6. Inspect file size.
+7. Inspect aspect ratio.
+8. Identify the strongest cinematic portions.
+9. Trim/select the best sections automatically.
+10. Create optimized web-ready versions.
+11. Keep the original source untouched.
+
+Do NOT unnecessarily duplicate huge source files.
+
+The production website should never serve massive original 4K footage directly if an optimized web version can be used.
+
+Prefer a browser-compatible web delivery format supported by the current Antigravity/browser environment.
+
+**Do NOT assume MP4 is required.**
+
+If the current Antigravity environment does not support MP4 processing/playback properly, use the appropriate supported web video format such as WebM or another browser-compatible format available in the environment.
+
+If automatic conversion is unavailable:
+
+* do not break the website
+* keep the video asset path replaceable
+* use a high-quality poster image temporarily
+* clearly tell me which exact format is required for that asset
+
+Do not make the entire project dependent on a format that the current environment cannot handle.
+
+---
+
+# 30. VIDEO QUALITY
+
+Maintain cinematic quality.
+
+Do not:
+
+* over-compress footage
+* make it blurry
+* stretch 16:9 footage
+* distort aspect ratio
+* crop important subjects unnecessarily
+* upscale low-resolution footage aggressively
+
+Use:
+
+* high-quality optimized web video
+* WebP/AVIF poster frames where supported
+* appropriate responsive versions
+* desktop/mobile optimization
+
+---
+
+# 31. PERFORMANCE — VERY IMPORTANT
+
+The hero must feel smooth.
+
+No laggy transitions.
+
+No white flash.
+
+No black flash.
+
+No blank 1-second scene.
+
+No visible video loading state.
+
+No layout jumping.
+
+No sudden FPS drops caused by unnecessary simultaneous video loading.
+
+Only preload what is necessary.
+
+Use:
+
+* poster frames
+* staged preloading
+* lazy loading
+* only one active destination video where practical
+* efficient animation
+* GPU-friendly transforms
+* transform/opacity-based animations
+* avoid expensive continuous layout calculations
+* avoid unnecessary DOM re-renders
+
+Do NOT load every large video simultaneously.
+
+The background music should not depend on destination video loading.
+
+---
+
+# 32. EVERY SCENE MUST START AND END SOFTLY
+
+This is extremely important.
+
+Every cinematic scene must have:
+
+**Soft start → cinematic body → soft end**
+
+Never:
+
+**hard start → hard cut → hard end**
+
+Use combinations of:
+
+* fade
+* crossfade
+* scale
+* camera movement
+* blur-to-sharp
+* depth transition
+* map zoom
+* matched movement
+
+But do not overuse effects.
+
+The goal is **premium cinematic**, not “many animations.”
+
+---
+
+# 33. MUSIC
+
+Use one continuous cinematic music track for the complete journey.
+
+Do NOT restart music for every scene.
+
+Music should evolve naturally:
+
+Opening:
+
+* emotional
+* mysterious
+* premium
+
+Map/route:
+
+* adventurous
+* travel energy
+
+Food:
+
+* warm
+* joyful
+
+Maheshwar:
+
+* emotional
+* cultural
+* expansive
+
+Return:
+
+* satisfying
+* uplifting
+
+Ending:
+
+* emotional brand resolution
+
+The music should be continuous.
+
+If audio assets are not yet supplied, create a replaceable audio asset slot and continue implementation.
+
+---
+
+# 34. SOUND DESIGN
+
+Where appropriate, use extremely subtle sound design:
+
+* soft map movement
+* bus/road ambience
+* destination atmosphere
+* food serving sound
+* subtle environmental ambience
+
+Do not turn the website into a loud sound-effects demo.
+
+Music remains the primary audio layer.
+
+Respect browser autoplay restrictions.
+
+If sound cannot autoplay, provide an elegant sound/music control rather than breaking the experience.
+
+---
+
+# 35. TYPOGRAPHY
+
+Use premium modern typography.
+
+Typography must be:
+
+* clean
+* highly readable
+* modern
+* Indian-premium
+* cinematic
+
+Do not use excessive text.
+
+Do not cover important footage with large paragraphs.
+
+Text should behave like cinematic titles/subtitles.
+
+---
+
+# 36. VISUAL LANGUAGE
+
+The entire experience should communicate:
+
+**Premium Indian travel film**
+
+not:
+
+* normal travel website
+* PowerPoint presentation
+* slideshow
+* card carousel
+* generic SaaS landing page
+* map dashboard
+
+Use cinematic visual rhythm.
+
+Allow the footage to breathe.
+
+Use negative space.
+
+Use elegant typography.
+
+Use restrained motion.
+
+---
+
+# 37. RESPONSIVE DESIGN
+
+Desktop should be the primary cinematic 16:9 experience.
+
+For smaller screens:
+
+* preserve the important composition
+* crop intelligently
+* maintain readable typography
+* keep bus/map understandable
+* avoid destroying the route visualization
+* use mobile-specific video crops/posters when necessary
+
+Do NOT simply shrink the desktop layout.
+
+---
+
+# 38. ACCESSIBILITY / UX
+
+Despite the cinematic nature, keep the website usable.
+
+Ensure:
+
+* readable contrast
+* keyboard accessible CTA
+* proper button labels
+* reduced-motion support
+* accessible form labels
+* mobile usability
+* no interaction blocked by animation
+
+If the user prefers reduced motion, provide a calmer version of the experience.
+
+---
+
+# 39. ASSET COLLECTION — ASK ME SEQUENTIALLY
+
+Do not ask me for every asset at once.
+
+Ask me in this order:
+
+### Asset 1
+
+**BharatVista 16:9 high-resolution map/logo**
+
+Then wait.
+
+### Asset 2
+
+**Madhya Pradesh cinematic/drone video**
+
+Then wait.
+
+### Asset 3
+
+**Jam Gate cinematic/drone video**
+
+Then wait.
+
+### Asset 4
+
+**Maheshwar cinematic/drone video**
+
+Then wait.
+
+### Asset 5
+
+**Shastradhara cinematic/drone video**
+
+Then wait.
+
+After those, ask for supporting assets:
+
+* Rau Circle nashta footage/photos
+* Dal Bafla/thali footage/photos
+* chai footage/photos
+* gift visual
+* bus asset if needed
+* additional Maheshwar photographs
+* additional pickup-point photographs if needed
+
+Do not continue inventing missing user-owned footage when I have said I will provide it.
+
+---
+
+# 40. IF I PROVIDE MULTIPLE CLIPS
+
+Do not automatically show every clip.
+
+Inspect them and select the best cinematic moments.
+
+If a source is 20, 30, 60 seconds, etc., intelligently cut it.
+
+Do not speed footage unnaturally.
+
+Do not force a 60-second video into a 2-second hyper-speed montage.
+
+Use the strongest section.
+
+Use natural transitions.
+
+Original files must remain untouched.
+
+---
+
+# 41. CURRENT ROUTE DATA
+
+Use this current journey:
+
+**Indore**
+
+Pickup:
+**Vijay Nagar — 8:00 AM**
+
+Pickup:
+**Bengali Square — 8:15 AM**
+
+Pickup:
+**Teen Imli — time to be provided**
+
+Pickup:
+**IT Park — time to be provided**
+
+Pickup:
+**Rajiv Gandhi — time to be provided**
+
+Then:
+
+**Rau Circle — Nashta**
+
+Then:
+
+**Jam Gate — Chai**
+
+Then:
+
+**Maheshwar — Dal Bafla Thali + Exploration**
+
+Then:
+
+**Shastradhara**
+
+Then:
+
+**Return to Indore**
+
+Current price:
+
+**₹700 / person**
+
+Keep all timing/duration information configurable.
+
+---
+
+# 42. IMPORTANT GEOGRAPHIC RULE
+
+Use the actual BharatVista map as the geographic foundation.
+
+Do not invent route geography.
+
+Do not use fake map geometry.
+
+Do not use Google Maps styling.
+
+The route should be a cinematic representation based on the actual geography represented by the provided BharatVista map.
+
+---
+
+# 43. IMPLEMENTATION QUALITY
+
+Use the project's existing technology stack.
+
+If Motion for React is already installed, use it appropriately.
+
+Use the existing UI/UX Pro Max guidance and maintain the existing project's design quality.
+
+Do not introduce unnecessary dependencies.
+
+Do not rewrite stable parts of the application without reason.
+
+Keep the animation architecture maintainable.
+
+Create reusable components such as conceptually:
+
+* CinematicHero
+* MapJourney
+* RouteAnimation
+* PickupStop
+* CinematicVideoScene
+* FoodScene
+* FinalBookingCTA
+* BookingForm
+
+Names can follow the project's conventions.
+
+---
+
+# 44. MASTER TIMELINE
+
+Create one master timeline/state machine.
+
+Conceptually:
+
+INTRO
+→ BRAND REVEAL
+→ TAGLINE
+→ CUSTOMER MESSAGE
+→ INDIA MAP
+→ MP ZOOM
+→ MP DRONE
+→ INDORE MAP
+→ PICKUPS
+→ RAU CIRCLE
+→ NASHTA CINEMATIC
+→ RAU CIRCLE MAP
+→ JAM GATE
+→ CHAI
+→ JAM GATE MAP
+→ MAHESHWAR
+→ THALI CINEMATIC
+→ MAHESHWAR CINEMATIC
+→ SHASTRADHARA
+→ SHASTRADHARA CINEMATIC
+→ RETURN TO INDORE
+→ FULL ROUTE REVEAL
+→ FINAL BRAND CTA
+→ BOOKING
+
+The transitions must be continuous.
+
+---
+
+# 45. FINAL QUALITY TEST
+
+Before considering the work complete, test the full hero from beginning to end.
+
+Check specifically:
+
+* Is there ANY blank frame?
+* Is there ANY unexplained 1-second pause?
+* Does the map zoom smoothly?
+* Does MP footage transition naturally from the map?
+* Does the bus actually look like it is driving?
+* Does the bus face its destination?
+* Are pickup points spaced properly?
+* Are Vijay Nagar and Bengali Square timings correct?
+* Is Rau Circle clearly the breakfast stop?
+* Is Jam Gate clearly only the chai stop?
+* Does the bus visibly leave every destination?
+* Does the map show travel duration between major stops?
+* Does Maheshwar get a premium thali sequence?
+* Are dal, bafle, ladoo, kadhi, rice and other food items visually introduced?
+* Does Maheshwar footage feel cinematic?
+* Is Shastradhara spelled correctly?
+* Does the return journey clearly communicate the complete route?
+* Is the final ₹700/person message clear?
+* Is the first-five-customers gift message clear?
+* Is there only one primary Book Your Seat CTA?
+* Does the booking form work?
+* Does the backend save the submitted information?
+* Are large videos optimized?
+* Are original source files untouched?
+* Is there no unnecessary simultaneous video loading?
+* Does every scene start softly?
+* Does every scene end softly?
+* Does the whole film feel like one continuous premium journey?
+
+---
+
+# FINAL CREATIVE DIRECTION
+
+The most important goal is:
+
+**When someone opens BharatVista, they should not feel that they are looking at a website.**
+
+For the first experience, they should feel that they have entered a **short cinematic travel film about their own weekend journey.**
+
+The viewer should emotionally experience:
+
+**“This is my journey.”**
+
+The map establishes where they are going.
+
+The bus establishes movement.
+
+The real drone footage establishes the destination.
+
+The food establishes the experience.
+
+The music establishes emotion.
+
+The final CTA converts that emotion into:
+
+**Book Your Seat**
+
+Make it premium, smooth, cinematic, Indian, modern, youthful and memorable.
+
+Do not sacrifice performance for effects.
+
+Do not sacrifice cinematic quality for arbitrary timing.
+
+Do not create blank filler time.
+
+**Every second must tell part of the BharatVista story.**
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-21T23:53:57+05:30.
+
+The user's current state is as follows:
+Active Document: /Applications/tour-travels/bharat-vista/.env (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 4
+</ADDITIONAL_METADATA>
