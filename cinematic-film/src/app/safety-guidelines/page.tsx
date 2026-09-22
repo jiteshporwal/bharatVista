@@ -30,7 +30,7 @@ export default function SafetyGuidelinesPage() {
           </p>
         </div>
 
-        <div className="rounded-3xl p-8 sm:p-12 bg-[#0A2E4C]/30 border border-white/10 space-y-8 text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
+        <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-12 bg-[#0A2E4C]/30 border border-white/10 space-y-8 text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
           {/* Operational Flexibility Notice */}
           <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-400/30 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />

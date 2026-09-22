@@ -1,10 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#061727",
+};
 
 export const metadata: Metadata = {
   title: "BharatVista — Cinematic Travel Film Experience",
   description:
-    "Discover Madhya Pradesh, Your Way. Indore → Rau Circle → Jam Gate → Maheshwar → Shastradhara. हर सफ़र, एक नई कहानी।",
+    "Discover Madhya Pradesh, Your Way. Indore → Rau Circle → Jam Gate → Maheshwar → Sahastradhara. हर सफ़र, एक नई कहानी।",
   icons: {
     icon: "/logo.png",
   },

@@ -34,15 +34,15 @@ export default function MaheshwarBlogPost() {
               <span>CULTURAL HERITAGE &amp; SLOW TRAVEL</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-tight">
+            <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-tight">
               Maheshwar: Where the Narmada, Heritage &amp; Slow Travel Meet
             </h1>
 
-            <p className="text-lg sm:text-xl font-serif text-amber-200/90 italic">
+            <p className="text-base sm:text-xl font-serif text-amber-200/90 italic">
               A contemplative day-trip from Indore through the Vindhyachals, into the heart of Ahilyabai&apos;s quiet capital.
             </p>
 
-            <div className="flex items-center gap-4 text-xs text-zinc-400 font-mono pt-2 border-y border-white/10 py-3">
+            <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-zinc-400 font-mono pt-2 border-y border-white/10 py-3 flex-wrap">
               <span>BharatVista Curations</span>
               <span>•</span>
               <span>8 min read</span>
@@ -52,7 +52,7 @@ export default function MaheshwarBlogPost() {
           </div>
 
           {/* Hero Banner Image */}
-          <div className="relative w-full h-[320px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl mb-12 border border-white/10">
+          <div className="relative w-full h-[220px] xs:h-[280px] sm:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl mb-8 sm:mb-12 border border-white/10">
             <Image
               src="/maheshwar.png"
               alt="Ahilya Fort over the Narmada Ghats"
@@ -62,7 +62,7 @@ export default function MaheshwarBlogPost() {
               sizes="(max-width: 1024px) 100vw, 900px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <span className="absolute bottom-4 left-6 text-xs text-zinc-300 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full font-mono">
+            <span className="absolute bottom-3 sm:bottom-4 left-3 right-3 sm:left-6 sm:right-auto text-[10px] sm:text-xs text-zinc-300 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full font-mono truncate">
               Ahilya Fort Ramparts overlooking the Sacred Narmada
             </span>
           </div>
@@ -175,14 +175,14 @@ export default function MaheshwarBlogPost() {
             </div>
 
             {/* Section 6: How to Experience This in a Single Day */}
-            <div className="my-12 p-8 rounded-3xl bg-[#0A2E4C]/60 border border-amber-400/30 space-y-6">
-              <h3 className="text-2xl font-serif font-bold text-white">
+            <div className="my-8 sm:my-12 p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0A2E4C]/60 border border-amber-400/30 space-y-4 sm:space-y-6">
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
                 How to Experience Maheshwar the BharatVista Way
               </h3>
-              <p className="text-sm sm:text-base text-zinc-300">
+              <p className="text-xs sm:text-base text-zinc-300">
                 You do not need an expensive weekend resort booking or private cab negotiations to experience this. BharatVista curates this entire day-trip from Indore every Saturday and Sunday for just <strong>₹{TRIP_CONFIG.price} per person</strong>:
               </p>
-              <ul className="space-y-2 text-sm text-zinc-200">
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-zinc-200">
                 <li>• 06:45 AM: Pickup from Indore (Vijay Nagar, Bengali Sq, Teen Imli, IT Park, Rajiv Gandhi)</li>
                 <li>• 07:30 AM: Fresh Indori poha &amp; chai breakfast at Rau Circle</li>
                 <li>• 09:00 AM: Mountain pass views and cutting chai at Jam Gate</li>
@@ -197,7 +197,7 @@ export default function MaheshwarBlogPost() {
               <div className="pt-2">
                 <button
                   onClick={() => setBookingModalOpen(true)}
-                  className="px-8 py-3.5 rounded-full font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-xl shadow-[#EA580C]/40 flex items-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-xl shadow-[#EA580C]/40 flex items-center justify-center gap-2 cursor-pointer min-h-[48px]"
                 >
                   <Bus className="w-4 h-4" />
                   <span>Reserve Your Seat • ₹{TRIP_CONFIG.price}</span>

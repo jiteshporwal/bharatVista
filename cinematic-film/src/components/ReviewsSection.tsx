@@ -88,8 +88,8 @@ export default function ReviewsSection() {
   };
 
   return (
-    <section id="reviews" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+    <section id="reviews" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-12">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono">
           <Sparkles className="w-3.5 h-3.5 text-amber-400" />
           <span>AUTHENTIC TRAVELLER WORDS • ZERO FABRICATION</span>
@@ -97,19 +97,19 @@ export default function ReviewsSection() {
 
         {reviews.length > 0 ? (
           <>
-            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
               Real Trips. <span className="text-[#EA580C]">Real Memories.</span>
             </h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-light">
+            <p className="text-xs sm:text-base text-zinc-300 font-light">
               Straight from BharatVista travellers — no filters, no scripts.
             </p>
           </>
         ) : (
           <>
-            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
               Traveller Voices
             </h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-light">
+            <p className="text-xs sm:text-base text-zinc-300 font-light">
               We never fabricate testimonials or invent fake reviews.
             </p>
           </>
@@ -118,19 +118,19 @@ export default function ReviewsSection() {
 
       {/* Review Content: Zero State vs Genuine Review Feed */}
       {reviews.length === 0 && !loading ? (
-        <div className="max-w-2xl mx-auto rounded-3xl bg-[#0A2E4C]/40 border border-white/10 p-8 sm:p-12 text-center space-y-6 shadow-2xl">
-          <div className="w-16 h-16 rounded-full bg-amber-500/15 border border-amber-400/30 flex items-center justify-center mx-auto text-amber-400">
-            <Star className="w-8 h-8 fill-amber-400/20 text-amber-400" />
+        <div className="max-w-2xl mx-auto rounded-2xl sm:rounded-3xl bg-[#0A2E4C]/40 border border-white/10 p-5 sm:p-12 text-center space-y-5 sm:space-y-6 shadow-2xl">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-amber-500/15 border border-amber-400/30 flex items-center justify-center mx-auto text-amber-400">
+            <Star className="w-7 h-7 sm:w-8 sm:h-8 fill-amber-400/20 text-amber-400" />
           </div>
 
           <div className="space-y-2">
-            <span className="text-xs uppercase tracking-[0.25em] font-mono font-bold text-amber-400 block">
+            <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] font-mono font-bold text-amber-400 block">
               HONEST BEGINNING
             </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+            <h3 className="text-xl sm:text-3xl font-serif font-bold text-white">
               0 Reviews Yet
             </h3>
-            <p className="text-base font-serif italic text-amber-200">
+            <p className="text-sm sm:text-base font-serif italic text-amber-200">
               &ldquo;But your one review still matters to us.&rdquo;
             </p>
             <p className="text-xs sm:text-sm text-zinc-300 max-w-md mx-auto leading-relaxed pt-1">
@@ -140,20 +140,20 @@ export default function ReviewsSection() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer min-h-[44px]"
           >
             <MessageSquarePlus className="w-4 h-4" />
             <span>Share Your Experience</span>
           </button>
         </div>
       ) : (
-        /* Horizontally Scrollable Review Feed (Part 27) */
+        /* Horizontally Scrollable Review Feed */
         <div className="space-y-6">
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-amber-500/40">
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-amber-500/40">
             {reviews.map((rev) => (
               <div
                 key={rev.id}
-                className="min-w-[300px] sm:min-w-[380px] p-6 rounded-3xl bg-[#0A2E4C]/50 border border-white/10 space-y-4 text-left shrink-0 shadow-xl"
+                className="min-w-[260px] xs:min-w-[280px] sm:min-w-[380px] p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#0A2E4C]/50 border border-white/10 space-y-3.5 sm:space-y-4 text-left shrink-0 shadow-xl"
               >
                 {/* Rating stars */}
                 <div className="flex items-center justify-between">
@@ -161,7 +161,7 @@ export default function ReviewsSection() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 ${
+                        className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
                           i < rev.rating
                             ? "text-amber-400 fill-amber-400"
                             : "text-zinc-600"
@@ -170,18 +170,18 @@ export default function ReviewsSection() {
                     ))}
                   </div>
                   {rev.tag && (
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    <span className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                       {rev.tag}
                     </span>
                   )}
                 </div>
 
-                <p className="text-sm font-serif italic text-zinc-200 leading-relaxed">
+                <p className="text-xs sm:text-sm font-serif italic text-zinc-200 leading-relaxed">
                   &ldquo;{rev.comment}&rdquo;
                 </p>
 
                 <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
-                  <span className="font-semibold text-white">{rev.name}</span>
+                  <span className="font-semibold text-white text-xs">{rev.name}</span>
                   <span className="text-[10px] font-mono">
                     {new Date(rev.createdAt).toLocaleDateString("en-IN", {
                       day: "numeric",
@@ -197,7 +197,7 @@ export default function ReviewsSection() {
           <div className="text-center pt-2">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-amber-300 bg-white/5 hover:bg-white/10 border border-amber-400/30 transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 rounded-full text-xs font-semibold text-amber-300 bg-white/5 hover:bg-white/10 border border-amber-400/30 transition-all cursor-pointer min-h-[40px]"
             >
               <MessageSquarePlus className="w-3.5 h-3.5" />
               <span>Add Your Honest Review</span>
@@ -206,10 +206,10 @@ export default function ReviewsSection() {
         </div>
       )}
 
-      {/* Review Submission Modal (Part 26) */}
+      {/* Review Submission Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-2.5 sm:p-4 overflow-y-auto">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -225,23 +225,23 @@ export default function ReviewsSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-lg bg-[#061727] border border-amber-400/40 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 text-white my-8 space-y-6"
+              className="relative w-full max-w-lg bg-[#061727] border border-amber-400/40 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl z-10 text-white my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] overflow-y-auto space-y-4 sm:space-y-6"
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-zinc-300 hover:text-white"
+                className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 text-zinc-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer z-20"
                 aria-label="Close review dialog"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {!submittedSuccess ? (
-                <form onSubmit={handleSubmitReview} className="space-y-5 text-left">
+                <form onSubmit={handleSubmitReview} className="space-y-4 sm:space-y-5 text-left pt-2 sm:pt-0">
                   <div className="space-y-1">
-                    <span className="text-xs uppercase tracking-wider text-amber-400 font-mono font-bold block">
+                    <span className="text-[11px] sm:text-xs uppercase tracking-wider text-amber-400 font-mono font-bold block">
                       BHARATVISTA REVIEW
                     </span>
-                    <h3 className="text-2xl font-serif font-bold text-white">
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
                       Tell Us Your Experience
                     </h3>
                     <p className="text-xs text-zinc-300">
@@ -249,21 +249,21 @@ export default function ReviewsSection() {
                     </p>
                   </div>
 
-                  {/* Star rating selector (Automatically 5 stars, editable) */}
+                  {/* Star rating selector */}
                   <div>
-                    <label className="block text-xs text-zinc-300 mb-2">
+                    <label className="block text-xs text-zinc-300 mb-1.5">
                       Your Rating (5 Stars selected by default)
                     </label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <button
                           type="button"
                           key={star}
                           onClick={() => setRating(star)}
-                          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+                          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
                         >
                           <Star
-                            className={`w-7 h-7 ${
+                            className={`w-6 h-6 sm:w-7 sm:h-7 ${
                               star <= rating
                                 ? "text-amber-400 fill-amber-400"
                                 : "text-zinc-600"
@@ -271,7 +271,7 @@ export default function ReviewsSection() {
                           />
                         </button>
                       ))}
-                      <span className="text-xs font-mono text-amber-300 ml-2">
+                      <span className="text-xs font-mono text-amber-300 ml-1 sm:ml-2">
                         {rating} / 5 Stars
                       </span>
                     </div>
@@ -279,7 +279,7 @@ export default function ReviewsSection() {
 
                   {/* Name Input */}
                   <div>
-                    <label className="block text-xs text-zinc-300 mb-1.5 flex items-center gap-1.5">
+                    <label className="block text-xs text-zinc-300 mb-1 flex items-center gap-1.5">
                       <User className="w-3.5 h-3.5 text-amber-400" />
                       <span>Your Name</span>
                     </label>
@@ -288,16 +288,16 @@ export default function ReviewsSection() {
                       placeholder="e.g. Ananya Verma"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-zinc-500"
+                      className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-amber-400 focus:outline-none text-base sm:text-sm text-white placeholder:text-zinc-500"
                     />
                   </div>
 
-                  {/* 5 Suggested Options (Part 26) */}
+                  {/* 5 Suggested Options */}
                   <div>
-                    <label className="block text-xs text-zinc-300 mb-2">
+                    <label className="block text-xs text-zinc-300 mb-1.5">
                       Quick Impression
                     </label>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {SUGGESTED_OPTIONS.map((opt) => (
                         <button
                           type="button"
@@ -306,7 +306,7 @@ export default function ReviewsSection() {
                             setSelectedTag(opt);
                             if (!comment) setComment(opt);
                           }}
-                          className={`px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer text-left ${
+                          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition-all cursor-pointer text-left ${
                             selectedTag === opt
                               ? "bg-amber-500/25 border border-amber-400 text-amber-200"
                               : "bg-white/5 border border-white/10 text-zinc-400 hover:text-zinc-200"
@@ -320,7 +320,7 @@ export default function ReviewsSection() {
 
                   {/* Detailed Comment Input */}
                   <div>
-                    <label className="block text-xs text-zinc-300 mb-1.5">
+                    <label className="block text-xs text-zinc-300 mb-1">
                       Your Thoughts or Trip Feedback
                     </label>
                     <textarea
@@ -329,21 +329,21 @@ export default function ReviewsSection() {
                       placeholder="Share how the journey felt, your favourite moment, or any suggestions..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-zinc-500"
+                      className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-amber-400 focus:outline-none text-base sm:text-sm text-white placeholder:text-zinc-500"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 min-h-[48px]"
                   >
                     <Send className="w-4 h-4" />
                     <span>{isSubmitting ? "Saving Review..." : "Submit Review"}</span>
                   </button>
                 </form>
               ) : (
-                <div className="py-8 text-center space-y-3">
+                <div className="py-6 sm:py-8 text-center space-y-3">
                   <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/40">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
@@ -362,4 +362,3 @@ export default function ReviewsSection() {
     </section>
   );
 }
-

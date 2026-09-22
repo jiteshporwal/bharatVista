@@ -72,7 +72,7 @@ export default function LoginPage() {
         </div>
 
         {/* Login Box */}
-        <div className="rounded-3xl p-6 sm:p-8 bg-[#0A2E4C]/40 border border-white/15 shadow-2xl space-y-5">
+        <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-[#0A2E4C]/40 border border-white/15 shadow-2xl space-y-5">
           {errorMessage && (
             <div className="p-3.5 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
@@ -89,10 +89,10 @@ export default function LoginPage() {
                 type="text"
                 required
                 autoComplete="username"
-                placeholder="admin@bharatvista.com"
+                placeholder="admin@bharatvistatours.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
               />
             </div>
 
@@ -108,7 +108,7 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2.5 pr-10 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                  className="w-full px-3.5 sm:px-4 py-2.5 pr-10 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                 />
                 <button
                   type="button"
@@ -124,7 +124,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50 min-h-[48px]"
             >
               {isLoading ? (
                 <>

@@ -40,26 +40,26 @@ export default function ContactPage() {
             <span>CONNECT WITH BHARATVISTA</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-6xl font-serif font-bold text-white tracking-tight">
             We&apos;d Love to <span className="text-[#EA580C]">Hear From You</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
             Have a question about the itinerary, pickups in Indore, group discounts, or custom bookings? Reach out directly to our trip captains.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10">
           {/* Contact Direct Numbers & Info (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="rounded-3xl p-8 bg-[#0A2E4C]/50 border border-white/10 space-y-6">
-              <h2 className="text-2xl font-serif font-bold text-white">Direct Contacts</h2>
+            <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-[#0A2E4C]/50 border border-white/10 space-y-5 sm:space-y-6">
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-white">Direct Contacts</h2>
 
-              <div className="space-y-4">
+              <div className="space-y-3.5 sm:space-y-4">
                 {/* Primary Phone 1 */}
                 <a
                   href={`tel:${TRIP_CONFIG.phones.contact1}`}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group"
+                  className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[#EA580C]/20 border border-[#EA580C]/40 flex items-center justify-center text-[#EA580C] group-hover:scale-105 transition-transform">
                     <Phone className="w-5 h-5" />
@@ -122,17 +122,17 @@ export default function ContactPage() {
 
           {/* Contact / Message Form (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl p-8 sm:p-10 bg-[#0A2E4C]/30 border border-white/10">
-              <h2 className="text-2xl font-serif font-bold text-white mb-2">Send Us a Message</h2>
-              <p className="text-sm text-zinc-300 font-light mb-6">
+            <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-10 bg-[#0A2E4C]/30 border border-white/10">
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2">Send Us a Message</h2>
+              <p className="text-xs sm:text-sm text-zinc-300 font-light mb-6">
                 Fill out the form below and we will get back to you within a few hours.
               </p>
 
               {submitted ? (
-                <div className="p-8 rounded-2xl bg-white/5 border border-emerald-500/30 text-center space-y-4">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-emerald-500/30 text-center space-y-4">
                   <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
                   <h3 className="text-xl font-serif font-bold text-white">Message Received!</h3>
-                  <p className="text-sm text-zinc-300">
+                  <p className="text-xs sm:text-sm text-zinc-300">
                     Thank you for writing to BharatVista. Our team will reach out to you shortly via phone or WhatsApp.
                   </p>
                   <button
@@ -140,7 +140,7 @@ export default function ContactPage() {
                       setSubmitted(false);
                       setFormData({ name: "", mobile: "", email: "", message: "" });
                     }}
-                    className="px-6 py-2 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/15 text-white"
+                    className="px-6 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/15 text-white min-h-[40px]"
                   >
                     Send Another Message
                   </button>
@@ -148,7 +148,7 @@ export default function ContactPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                       Your Name *
                     </label>
                     <input
@@ -157,13 +157,13 @@ export default function ContactPage() {
                       placeholder="e.g. Rahul Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                         Mobile Number *
                       </label>
                       <input
@@ -172,12 +172,12 @@ export default function ContactPage() {
                         placeholder="10-digit mobile number"
                         value={formData.mobile}
                         onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm font-mono"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm font-mono"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1">
                         Email Address (Optional)
                       </label>
                       <input
@@ -185,13 +185,13 @@ export default function ContactPage() {
                         placeholder="rahul@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                       Message / Enquiry *
                     </label>
                     <textarea
@@ -200,14 +200,14 @@ export default function ContactPage() {
                       placeholder="Ask us anything about the trip schedule, food, booking details, or group discounts..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50"
+                    className="w-full py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50 min-h-[48px]"
                   >
                     <Send className="w-4 h-4" />
                     <span>{isSubmitting ? "Sending Message..." : "Submit Enquiry"}</span>

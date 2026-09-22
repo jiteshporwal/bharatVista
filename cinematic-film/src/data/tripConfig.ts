@@ -247,8 +247,8 @@ export const TRIP_CONFIG = {
     indoreToRau: "~20 mins • Morning Assembly",
     rauToJamGate: "~45 mins • Mountain Pass Climb",
     jamGateToMaheshwar: "~1 hr • Narmada Valley Descent",
-    maheshwarToShastradhara: "~20 mins • Sacred River Trail",
-    shastradharaToIndore: "~2 hrs • Evening Return to Indore (8–9 PM)",
+    maheshwarToSahastradhara: "~20 mins • Sacred River Trail",
+    sahastradharaToIndore: "~2 hrs • Evening Return to Indore (8–9 PM)",
   },
 
   // The 8 Authentic BharatVista Experiences (4 per row on desktop)

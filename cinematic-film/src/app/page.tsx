@@ -15,15 +15,22 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function CinematicFilmHome() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [isNavLogoVisible, setIsNavLogoVisible] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-[#061727] text-[#FFFDF9] overflow-x-hidden selection:bg-[#EA580C] selection:text-white">
       {/* Transparent Floating Overlay Header */}
-      <OverlayNav onBookSeatClick={() => setBookingModalOpen(true)} />
+      <OverlayNav
+        onBookSeatClick={() => setBookingModalOpen(true)}
+        isLogoVisible={isNavLogoVisible}
+      />
 
       <main>
         {/* Master Cinematic Travel Film Hero */}
-        <MasterCinematicHero onBookSeatClick={() => setBookingModalOpen(true)} />
+        <MasterCinematicHero
+          onBookSeatClick={() => setBookingModalOpen(true)}
+          onScene1Complete={() => setIsNavLogoVisible(true)}
+        />
 
         {/* Section 1: The 8 Authentic BharatVista Experiences */}
         <ExperiencesSection onBookSeatClick={() => setBookingModalOpen(true)} />

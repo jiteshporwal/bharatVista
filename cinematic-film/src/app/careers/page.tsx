@@ -103,41 +103,41 @@ export default function CareersPage() {
             <span>JOIN THE BHARATVISTA TEAM</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-6xl font-serif font-bold text-white tracking-tight">
             Build Meaningful Journeys <span className="text-[#EA580C]">With Us</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
             We are creating an emotional, authentic Indian travel brand. If you love people, storytelling, and creating joyful road memories, explore our open positions.
           </p>
         </div>
 
         {/* Roles List */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {ROLES.map((role) => (
             <div
               key={role.id}
-              className="rounded-3xl p-8 sm:p-10 bg-[#0A2E4C]/40 border border-white/10 hover:border-amber-400/30 transition-all shadow-xl space-y-6"
+              className="rounded-2xl sm:rounded-3xl p-5 sm:p-10 bg-[#0A2E4C]/40 border border-white/10 hover:border-amber-400/30 transition-all shadow-xl space-y-5 sm:space-y-6"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6">
                 <div>
-                  <div className="flex items-center gap-3 mb-2 flex-wrap">
-                    <span className="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+                    <span className="text-[11px] sm:text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300">
                       {role.department}
                     </span>
-                    <span className="text-xs font-mono text-zinc-400">
+                    <span className="text-[11px] sm:text-xs font-mono text-zinc-400">
                       {role.location} • {role.type}
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+                  <h2 className="text-xl sm:text-3xl font-serif font-bold text-white">
                     {role.title}
                   </h2>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <span className="text-[11px] font-mono uppercase text-zinc-400 block">Compensation</span>
-                    <span className="text-lg font-mono font-bold text-amber-300">{role.salary}</span>
+                <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+                  <div className="text-left sm:text-right">
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase text-zinc-400 block">Compensation</span>
+                    <span className="text-base sm:text-lg font-mono font-bold text-amber-300">{role.salary}</span>
                   </div>
 
                   <button
@@ -145,7 +145,7 @@ export default function CareersPage() {
                       setSelectedRole(role);
                       setApplicationSuccess(false);
                     }}
-                    className="px-6 py-3 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 transition-all cursor-pointer flex items-center gap-2 shrink-0"
+                    className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 transition-all cursor-pointer flex items-center gap-2 shrink-0 min-h-[44px]"
                   >
                     <span>Apply Now</span>
                     <ArrowRight className="w-4 h-4" />
@@ -193,18 +193,19 @@ export default function CareersPage() {
 
       {/* Application Modal */}
       {selectedRole && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-lg rounded-3xl bg-[#061727] border border-amber-400/40 p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-2.5 sm:p-4 bg-black/80 backdrop-blur-sm animate-fadeIn overflow-y-auto">
+          <div className="relative w-full max-w-lg rounded-2xl sm:rounded-3xl bg-[#061727] border border-amber-400/40 p-4 sm:p-8 shadow-2xl space-y-4 sm:space-y-6 my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setSelectedRole(null)}
-              className="absolute top-5 right-5 p-2 rounded-full bg-white/10 text-zinc-400 hover:text-white"
+              className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer z-20"
+              aria-label="Close application modal"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div>
+            <div className="pt-2 sm:pt-0">
               <span className="text-xs uppercase font-mono text-amber-400">Application Form</span>
-              <h3 className="text-2xl font-serif font-bold text-white mt-1">
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mt-1">
                 Apply for {selectedRole.title}
               </h3>
               <p className="text-xs text-zinc-400 mt-1">Salary: {selectedRole.salary}</p>
@@ -214,12 +215,12 @@ export default function CareersPage() {
               <div className="p-6 rounded-2xl bg-white/5 border border-emerald-500/30 text-center space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
                 <h4 className="text-xl font-serif font-bold text-white">Application Sent!</h4>
-                <p className="text-sm text-zinc-300">
+                <p className="text-xs sm:text-sm text-zinc-300">
                   Thank you, {applicant.name}. We have received your application for the {selectedRole.title} position. Our team will review your details and contact you via phone or WhatsApp.
                 </p>
                 <button
                   onClick={() => setSelectedRole(null)}
-                  className="px-6 py-2 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/15 text-white"
+                  className="px-6 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/15 text-white min-h-[40px]"
                 >
                   Close
                 </button>
@@ -227,7 +228,7 @@ export default function CareersPage() {
             ) : (
               <form onSubmit={handleApplySubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                     Full Name *
                   </label>
                   <input
@@ -236,13 +237,13 @@ export default function CareersPage() {
                     placeholder="e.g. Ananya Patel"
                     value={applicant.name}
                     onChange={(e) => setApplicant({ ...applicant, name: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                       Mobile Number *
                     </label>
                     <input
@@ -251,11 +252,11 @@ export default function CareersPage() {
                       placeholder="10-digit mobile"
                       value={applicant.mobile}
                       onChange={(e) => setApplicant({ ...applicant, mobile: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm font-mono"
+                      className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1">
                       Email Address
                     </label>
                     <input
@@ -263,13 +264,13 @@ export default function CareersPage() {
                       placeholder="ananya@example.com"
                       value={applicant.email}
                       onChange={(e) => setApplicant({ ...applicant, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                      className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                     Prior Travel / Hosting Experience
                   </label>
                   <input
@@ -277,12 +278,12 @@ export default function CareersPage() {
                     placeholder="e.g. Hosted campus trips, guided friends in MP, travel enthusiast"
                     value={applicant.experience}
                     onChange={(e) => setApplicant({ ...applicant, experience: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-1">
                     Why do you want to join BharatVista? *
                   </label>
                   <textarea
@@ -291,13 +292,13 @@ export default function CareersPage() {
                     placeholder="Tell us a little about yourself and your passion for travel..."
                     value={applicant.message}
                     onChange={(e) => setApplicant({ ...applicant, message: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-base sm:text-sm"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 flex items-center justify-center gap-2 cursor-pointer transition-all"
+                  className="w-full py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-lg shadow-[#EA580C]/40 flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[48px]"
                 >
                   <Send className="w-4 h-4" />
                   <span>Submit Application</span>

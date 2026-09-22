@@ -74,8 +74,8 @@ export const MP_STOPS: ItineraryStop[] = [
       "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1600&q=80",
   },
   {
-    id: "shastradhara",
-    name: "Shastradhara",
+    id: "sahastradhara",
+    name: "Sahastradhara",
     subtitle: "Where Narmada Splits Into a Thousand Streams",
     type: "destination",
     coordinates: "22.1812° N, 75.5122° E",

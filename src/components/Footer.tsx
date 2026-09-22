@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Compass, Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Compass, Mail, Phone, MapPin, Heart, Lock } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -91,7 +91,18 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} BharatVista Tours & Travels. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
+            <p>© {new Date().getFullYear()} BharatVista Tours & Travels. All rights reserved.</p>
+            <span className="hidden sm:inline text-zinc-700">•</span>
+            <Link
+              href="/admin/login"
+              className="text-zinc-500 hover:text-zinc-300 transition-colors inline-flex items-center gap-1"
+              title="Staff & Operator Console"
+            >
+              <Lock className="w-3 h-3 text-zinc-600" />
+              <span>Admin Login</span>
+            </Link>
+          </div>
           <div className="flex items-center gap-1">
             <span>Crafted with devotion for</span>
             <span className="text-amber-400 font-serif font-semibold">Incredible India</span>

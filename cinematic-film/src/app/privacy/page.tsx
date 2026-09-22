@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
           </p>
         </div>
 
-        <div className="rounded-3xl p-8 sm:p-12 bg-[#0A2E4C]/30 border border-white/10 space-y-8 text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
+        <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-12 bg-[#0A2E4C]/30 border border-white/10 space-y-8 text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
           <div className="space-y-3">
             <h2 className="text-xl font-serif font-bold text-white">1. Our Commitment to Your Privacy</h2>
             <p>

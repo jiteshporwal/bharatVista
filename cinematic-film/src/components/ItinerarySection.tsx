@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Clock, MapPin, Sparkles, Bus, ArrowRight } from "lucide-react";
+import { Clock, Bus, ArrowRight } from "lucide-react";
 import { TRIP_CONFIG } from "@/data/tripConfig";
 
 interface ItinerarySectionProps {
@@ -11,19 +11,19 @@ interface ItinerarySectionProps {
 
 export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionProps) {
   return (
-    <section id="itinerary" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="itinerary" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
+      <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono">
           <Clock className="w-3.5 h-3.5 text-amber-400" />
           <span>FULL ONE-DAY SCHEDULE • INDORE ROUND-TRIP</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
+        <h2 className="text-2xl xs:text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
           The Curated <span className="text-[#EA580C]">Weekend Timeline</span>
         </h2>
 
-        <p className="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+        <p className="text-xs sm:text-base text-zinc-300 font-light leading-relaxed">
           From sunrise pickups in Indore to serene sunset aarti on the Narmada ghats.
           Every stop is timed for comfort, camaraderie, and discovery.
         </p>
@@ -51,7 +51,7 @@ export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionPr
               >
                 {/* Visual Image Card */}
                 <div className="w-full sm:w-1/2">
-                  <div className="relative h-48 sm:h-56 rounded-3xl overflow-hidden shadow-xl border border-white/10 group">
+                  <div className="relative h-44 xs:h-48 sm:h-56 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/10 group">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -60,8 +60,8 @@ export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionPr
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#061727] via-transparent to-black/20" />
-                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">
-                      <span className="font-mono bg-black/60 px-2.5 py-0.5 rounded-full border border-white/10">
+                    <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-4 flex items-center justify-between text-xs text-white">
+                      <span className="font-mono bg-black/70 px-2.5 py-0.5 rounded-full border border-white/10 text-[10px] sm:text-xs">
                         {item.highlight}
                       </span>
                     </div>
@@ -80,7 +80,7 @@ export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionPr
                     <span>{item.time}</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
+                  <h3 className="text-lg sm:text-2xl font-serif font-bold text-white">
                     {item.title}
                   </h3>
 
@@ -95,12 +95,12 @@ export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionPr
       </div>
 
       {/* Book Callout at Bottom of Itinerary */}
-      <div className="mt-16 text-center">
+      <div className="mt-12 sm:mt-16 text-center">
         <button
           onClick={onBookSeatClick}
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full text-base font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-xl shadow-[#EA580C]/40 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] hover:to-[#ea580c] shadow-xl shadow-[#EA580C]/40 transition-all transform hover:-translate-y-0.5 cursor-pointer min-h-[48px]"
         >
-          <Bus className="w-5 h-5" />
+          <Bus className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Book This Journey • ₹{TRIP_CONFIG.price}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -108,4 +108,3 @@ export default function ItinerarySection({ onBookSeatClick }: ItinerarySectionPr
     </section>
   );
 }
-

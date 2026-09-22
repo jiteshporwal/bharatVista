@@ -25,18 +25,18 @@ export default function BlogIndexPage() {
             <span>BHARATVISTA TRAVEL JOURNAL</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-6xl font-serif font-bold text-white tracking-tight">
             Stories From <span className="text-[#EA580C]">The Road</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-lg text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
             Explorations, cultural deep-dives, food trails, and slow travel notes across the heart of India.
           </p>
         </div>
 
         {/* Featured Flagship Article */}
-        <div className="rounded-3xl overflow-hidden bg-[#0A2E4C]/50 border border-white/15 shadow-2xl grid grid-cols-1 lg:grid-cols-12 mb-12 group">
-          <div className="lg:col-span-7 relative min-h-[340px] sm:min-h-[420px]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0A2E4C]/50 border border-white/15 shadow-2xl grid grid-cols-1 lg:grid-cols-12 mb-8 sm:mb-12 group">
+          <div className="lg:col-span-7 relative min-h-[240px] xs:min-h-[300px] sm:min-h-[420px]">
             <Image
               src="/maheshwar.png"
               alt="Maheshwar Ahilya Fort & Narmada Ghats"
@@ -48,7 +48,7 @@ export default function BlogIndexPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#061727] via-transparent to-transparent lg:hidden" />
           </div>
 
-          <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between space-y-6">
+          <div className="lg:col-span-5 p-5 sm:p-12 flex flex-col justify-between space-y-5 sm:space-y-6">
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-xs font-mono text-amber-300">
                 <span className="px-2.5 py-1 rounded bg-[#EA580C]/20 border border-[#EA580C]/40 text-[#EA580C] font-semibold">
