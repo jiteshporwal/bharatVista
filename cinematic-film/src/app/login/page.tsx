@@ -1,24 +1,48 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Lock, Mail, ArrowRight, ShieldCheck, Info, Sparkles } from "lucide-react";
+import { Lock, Mail, ArrowRight, ShieldCheck, Info, Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
 import OverlayNav from "@/components/OverlayNav";
 import Footer from "@/components/Footer";
 import SeatBookingModal from "@/components/SeatBookingModal";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { TRIP_CONFIG } from "@/data/tripConfig";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<"guest" | "staff">("staff");
-  const [msg, setMsg] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMsg("Internal authentication portal is under scheduled maintenance. For bookings, please use the direct enquiry flow without an account.");
+    setErrorMessage("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        router.push("/admin/dashboard");
+        router.refresh();
+      } else {
+        setErrorMessage(data.error || "Authentication failed. Please verify credentials.");
+      }
+    } catch {
+      setErrorMessage("Network error occurred while signing in.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -49,31 +73,12 @@ export default function LoginPage() {
 
         {/* Login Box */}
         <div className="rounded-3xl p-6 sm:p-8 bg-[#0A2E4C]/40 border border-white/15 shadow-2xl space-y-5">
-          {/* Role Toggle */}
-          <div className="grid grid-cols-2 p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-medium">
-            <button
-              type="button"
-              onClick={() => setRole("staff")}
-              className={`py-2 rounded-lg transition-all ${
-                role === "staff"
-                  ? "bg-[#EA580C] text-white font-semibold shadow"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              Trip Staff
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("guest")}
-              className={`py-2 rounded-lg transition-all ${
-                role === "guest"
-                  ? "bg-[#EA580C] text-white font-semibold shadow"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              Admin Portal
-            </button>
-          </div>
+          {errorMessage && (
+            <div className="p-3.5 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
@@ -83,7 +88,8 @@ export default function LoginPage() {
               <input
                 type="text"
                 required
-                placeholder="staff@bharatvista.com"
+                autoComplete="username"
+                placeholder="admin@bharatvista.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
@@ -94,35 +100,50 @@ export default function LoginPage() {
               <label className="block text-xs font-mono uppercase text-zinc-300 mb-1">
                 Password
               </label>
-              <input
-                type="password"
-                required
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  autoComplete="current-password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2.5 pr-10 rounded-xl bg-white/5 border border-white/15 focus:border-[#EA580C] focus:outline-none text-white text-sm"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white p-1 cursor-pointer"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
-
-            {msg && (
-              <p className="text-xs text-amber-300 bg-black/40 p-3 rounded-xl border border-amber-500/30">
-                {msg}
-              </p>
-            )}
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all"
+              disabled={isLoading}
+              className="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-[#EA580C] to-[#C2410C] hover:from-[#f97316] shadow-lg shadow-[#EA580C]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50"
             >
-              <span>Sign In to Console</span>
-              <ArrowRight className="w-4 h-4" />
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Signing In...</span>
+                </>
+              ) : (
+                <>
+                  <span>Sign In to Console</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
           </form>
 
           <div className="pt-2 text-center">
             <button
               onClick={() => setBookingModalOpen(true)}
-              className="text-xs text-amber-300 hover:underline"
+              className="text-xs text-amber-300 hover:underline cursor-pointer"
             >
               Want to book a seat instead? Click here (No login required)
             </button>
@@ -136,4 +157,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
